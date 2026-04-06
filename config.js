@@ -10,20 +10,16 @@ const CONFIG = {
   title: "BS Computer Science Student",
   organization: "University of Caloocan City",
 
-  // Set this to a URL or relative path once your profile photo is ready.
-  // Leave null to keep the default user silhouette.
-  avatar: null,
+  // Profile photo — Google Drive direct-view link
+  avatar: "https://lh3.googleusercontent.com/d/1Z-us_TF9hIgwajoA0XzfMcgvO6Mh1dbi",
+
+  // University logo — Google Drive direct-view link
+  universityLogo: "https://lh3.googleusercontent.com/d/1yjmrJoOXJcNG5A9jOffb1Z8uKx7D44Hb",
 
   // Brief paragraph shown in the "Professional Summary" card.
-  summary: `Aaron Austin C. Amaro is a dedicated Bachelor of Science in Computer Science student at the
-University of Caloocan City. With a passion for technology and software development, Aaron is
-continuously building skills in programming, web development, and problem-solving. He is eager
-to learn, collaborate, and contribute to meaningful projects that push the boundaries of what
-technology can achieve. Outside academics, Aaron enjoys exploring new tools, contributing to
-open-source projects, and staying up-to-date with the latest in computer science.`,
+  summary: `Aaron Austin C. Amaro is a dedicated Bachelor of Science in Computer Science student at the University of Caloocan City. With a passion for technology and software development, Aaron is continuously building skills in programming, web development, and problem-solving. He is eager to learn, collaborate, and contribute to meaningful projects that push the boundaries of what technology can achieve. Outside academics, Aaron enjoys exploring new tools, contributing to open-source projects, and staying up-to-date with the latest in computer science.`,
 
   // ── Social Links ────────────────────────────────────────────
-  // Each entry: { platform, url, icon (inline SVG path data), viewBox }
   socials: [
     {
       platform: "LinkedIn",
@@ -65,20 +61,12 @@ open-source projects, and staying up-to-date with the latest in computer science
   phoneDisplay: "+63 968 508 1968",
 
   // ── Certificates / Google Drive Links ───────────────────────
-  // Add Google Drive image links here when ready. Example:
-  // certificates: [
-  //   { title: "Certificate Name", imageUrl: "https://drive.google.com/..." },
-  // ]
   certificates: [],
 
   // ── Projects ────────────────────────────────────────────────
-  // Add projects as you build them. Example:
-  // projects: [
-  //   { title: "Project Name", description: "...", url: "https://...", tags: ["HTML","CSS","JS"] },
-  // ]
   projects: [],
 
-  // ── CV / Resume Link ────────────────────────────────────────
+  // ── Resume Link ─────────────────────────────────────────────
   // Set to a Google Drive share link or file path when ready.
-  cvLink: null
+  resumeLink: null
 };

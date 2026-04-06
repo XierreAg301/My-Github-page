@@ -15,12 +15,14 @@
     <ul class="navbar__links" id="nav-links">
       <li><a href="#bio">Bio</a></li>
       <li><a href="#education">Education</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#certificates">Certificates</a></li>
     </ul>
     <div class="navbar__icons">
-      <button class="navbar__icon-btn" id="search-btn" aria-label="Search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7l126.6 126.7c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+      <button class="navbar__icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+        <!-- Moon icon (shown in light mode) -->
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256 0C114.6 0 0 114.6 0 256S114.6 512 256 512c68.8 0 131.3-27.2 177.3-71.4 7.3-7 9.4-17.9 5.3-27.1s-13.7-14.9-23.8-14.1c-4.9 .4-9.8 .6-14.8 .6-101.6 0-184-82.4-184-184 0-72.1 41.5-134.6 102.1-164.8 9.1-4.5 14.3-14.3 13.1-24.4S322.6 8.5 312.7 6.3C294.4 2.2 275.4 0 256 0z"/></svg>
+        <!-- Sun icon (shown in dark mode) -->
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" style="display:none;"><path d="M288-32c8.4 0 16.3 4.4 20.6 11.7L364.1 72.3 468.9 46c8.2-2 16.9 .4 22.8 6.3S500 67 498 75.1l-26.3 104.7 92.7 55.5c7.2 4.3 11.7 12.2 11.7 20.6s-4.4 16.3-11.7 20.6L471.7 332.1 498 436.8c2 8.2-.4 16.9-6.3 22.8S477 468 468.9 466l-104.7-26.3-55.5 92.7c-4.3 7.2-12.2 11.7-20.6 11.7s-16.3-4.4-20.6-11.7L211.9 439.7 107.2 466c-8.2 2-16.8-.4-22.8-6.3S76 445 78 436.8l26.2-104.7-92.6-55.5C4.4 272.2 0 264.4 0 256s4.4-16.3 11.7-20.6L104.3 179.9 78 75.1c-2-8.2 .3-16.8 6.3-22.8S99 44 107.2 46l104.7 26.2 55.5-92.6 1.8-2.6c4.5-5.7 11.4-9.1 18.8-9.1zm0 144a144 144 0 1 0 0 288 144 144 0 1 0 0-288zm0 240a96 96 0 1 1 0-192 96 96 0 1 1 0 192z"/></svg>
       </button>
       <button class="mobile-menu-btn" id="menu-toggle" aria-label="Toggle menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
@@ -50,82 +52,59 @@
         <!-- Social Icons — rendered by JS -->
         <div class="social-icons" id="social-icons"></div>
 
-        <!-- Download CV -->
-        <a href="#" class="btn-cv" id="download-cv">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 210.7-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7 256 32zM64 320c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-46.9 0-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320 64 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
-          Download CV
+        <!-- See My Resume -->
+        <a href="#" class="btn-cv" id="resume-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM112 256l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>
+          See My Resume
         </a>
       </div>
 
-      <!-- Right: Professional Summary -->
+      <!-- Right: Professional Summary + Education (compact) -->
       <div class="details">
         <div class="section-header">
           <div class="section-header__icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80 0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16 0-44.2 35.8-80 80-80zm-24-96a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm240-48l112 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-112 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 96l112 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-112 0c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></svg>
           </div>
           <h2>Professional Summary</h2>
         </div>
         <p class="summary-text" id="summary-text"></p>
-      </div>
-    </section>
 
-    <!-- Education Section -->
-    <section class="education" id="education">
-      <div class="section-header">
-        <div class="section-header__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M48 195.8l209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1C309 34.1 298.6 32 288 32s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160L0 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-260.2zm48 71.7L96 384c0 53 86 96 192 96s192-43 192-96l0-116.6-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z"/></svg>
+        <!-- Education — compact, inside hero card -->
+        <div class="section-header" id="education" style="margin-top: 32px;">
+          <div class="section-header__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M48 195.8l209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1C309 34.1 298.6 32 288 32s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160L0 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-260.2zm48 71.7L96 384c0 53 86 96 192 96s192-43 192-96l0-116.6-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z"/></svg>
+          </div>
+          <h2>Education</h2>
         </div>
-        <h2>Education</h2>
-      </div>
-      <div class="edu-cards" id="edu-cards">
-        <!-- JS will render education cards here -->
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="education" id="projects" style="margin-top: 40px;">
-      <div class="section-header">
-        <div class="section-header__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L238.4 51.2C232.4 43 222.9 38.4 212.8 38.4H64c-35.3 0-64 28.7-64 64V416c0 35.3 28.7 64 64 64z"/></svg>
+        <div class="edu-inline" id="edu-cards">
+          <!-- JS will render compact education cards here -->
         </div>
-        <h2>Projects</h2>
-      </div>
-      <div class="edu-cards" id="project-cards">
-        <!-- JS will render project cards or placeholder -->
       </div>
     </section>
 
     <!-- Certificates Section -->
-    <section class="education" id="certificates" style="margin-top: 40px; display: none;">
+    <section class="section-card" id="certificates">
       <div class="section-header">
         <div class="section-header__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M211 7.3C205 1 196-1.4 187.6 .8s-14.9 8.9-17.1 17.3L154.7 80.6l-62-17.5c-8.4-2.4-17.4 0-23.5 6.1s-8.5 15.1-6.1 23.5l17.5 62L18.1 170.6c-8.4 2.2-15 8.7-17.3 17.1S1 205 7.3 211l46.2 45L7.3 301C1 307-1.4 316 .8 324.4s8.9 14.9 17.3 17.1l62.5 15.8-17.5 62c-2.4 8.4 0 17.4 6.1 23.5s15.1 8.5 23.5 6.1l62-17.5 15.8 62.5c2.2 8.4 8.7 15 17.1 17.3s17.3-.2 23.4-6.4l45-46.2 45 46.2c6.1 6.2 15 8.7 23.4 6.4s14.9-8.9 17.1-17.3l15.8-62.5 62 17.5c8.4 2.4 17.4 0 23.5-6.1s8.5-15.1 6.1-23.5l-17.5-62 62.5-15.8c8.4-2.2 15-8.7 17.3-17.1s-.2-17.3-6.4-23.4l-46.2-45 46.2-45c6.2-6.1 8.7-15 6.4-23.4s-8.9-14.9-17.3-17.1l-62.5-15.8 17.5-62c2.4-8.4 0-17.4-6.1-23.5s-15.1-8.5-23.5-6.1l-62 17.5L341.4 18.1c-2.2-8.4-8.7-15-17.1-17.3S307 1 301 7.3L256 53.5 211 7.3z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M239.2-8c-6.1-6.2-15-8.7-23.4-6.4S200.9-5.6 198.8 2.8L183.5 63c-1.1 4.4-5.6 7-9.9 5.7L113.8 51.9c-8.4-2.4-17.4 0-23.5 6.1s-8.5 15.1-6.1 23.5l16.9 59.8c1.2 4.3-1.4 8.8-5.7 9.9L35.1 166.5c-8.4 2.1-15 8.7-17.3 17.1s.2 17.3 6.4 23.4l44.5 43.3c3.2 3.1 3.2 8.3 0 11.5L24.3 305.1c-6.2 6.1-8.7 15-6.4 23.4s8.9 14.9 17.3 17.1l60.2 15.3c4.4 1.1 7 5.6 5.7 9.9L84.2 430.5c-2.4 8.4 0 17.4 6.1 23.5s15.1 8.5 23.5 6.1l59.8-16.9c4.3-1.2 8.8 1.4 9.9 5.7l15.3 60.2c2.1 8.4 8.7 15 17.1 17.3s17.3-.2 23.4-6.4l43.3-44.5c3.1-3.2 8.3-3.2 11.5 0L337.3 520c6.1 6.2 15 8.7 23.4 6.4s14.9-8.9 17.1-17.3L393.1 449c1.1-4.4 5.6-7 9.9-5.7l59.8 16.9c8.4 2.4 17.4 0 23.5-6.1s8.5-15.1 6.1-23.5l-16.9-59.8c-1.2-4.3 1.4-8.8 5.7-9.9l60.2-15.3c8.4-2.1 15-8.7 17.3-17.1s-.2-17.4-6.4-23.4l-44.5-43.3c-3.2-3.1-3.2-8.3 0-11.5l44.5-43.3c6.2-6.1 8.7-15 6.4-23.4s-8.9-14.9-17.3-17.1l-60.2-15.3c-4.4-1.1-7-5.6-5.7-9.9l16.9-59.8c2.4-8.4 0-17.4-6.1-23.5s-15.1-8.5-23.5-6.1L403 68.8c-4.3 1.2-8.8-1.4-9.9-5.7L377.8 2.8c-2.1-8.4-8.7-15-17.1-17.3s-17.3 .2-23.4 6.4L294 36.5c-3.1 3.2-8.3 3.2-11.5 0L239.2-8z"/></svg>
         </div>
         <h2>Certificates</h2>
       </div>
       <div class="edu-cards" id="cert-cards">
-        <!-- JS will render certificate cards here -->
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-      <div class="section-header">
-        <div class="section-header__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z"/></svg>
-        </div>
-        <h2>Contact</h2>
-      </div>
-      <div class="contact-grid" id="contact-grid">
-        <!-- JS will render contact cards here -->
+        <!-- JS will render certificate cards or placeholder -->
       </div>
     </section>
 
   </main>
 
-  <!-- Footer -->
+  <!-- ===== Footer with Contact ===== -->
   <footer class="footer" id="footer">
-    <!-- JS will inject footer text -->
+    <div class="footer__contact" id="footer-contact">
+      <!-- JS will render contact items here -->
+    </div>
+    <div class="footer__copy" id="footer-copy">
+      <!-- JS will inject copyright -->
+    </div>
   </footer>
 
   <!-- ===== Scripts ===== -->
@@ -150,8 +129,7 @@
       document.title = `${C.name} | Portfolio`;
 
       // Navbar brand
-      const brand = document.getElementById("nav-brand");
-      brand.textContent = C.name.split(" ").slice(0, 2).join(" ");
+      document.getElementById("nav-brand").textContent = C.name.split(" ").slice(0, 2).join(" ");
 
       // Avatar
       const avatarContainer = document.getElementById("avatar-container");
@@ -159,14 +137,13 @@
         const img = document.createElement("img");
         img.src = C.avatar;
         img.alt = C.name;
+        img.referrerPolicy = "no-referrer";
         avatarContainer.appendChild(img);
       } else {
-        // Default user silhouette
-        const fallback = svgIcon(
+        avatarContainer.appendChild(svgIcon(
           "M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z",
           "0 0 448 512"
-        );
-        avatarContainer.appendChild(fallback);
+        ));
       }
 
       // Name, title, org
@@ -191,71 +168,62 @@
         socialContainer.appendChild(a);
       });
 
-      // Download CV
-      const cvBtn = document.getElementById("download-cv");
-      if (C.cvLink) {
-        cvBtn.href = C.cvLink;
-        cvBtn.target = "_blank";
-        cvBtn.rel = "noopener noreferrer";
+      // Resume button
+      const resumeBtn = document.getElementById("resume-btn");
+      if (C.resumeLink) {
+        resumeBtn.href = C.resumeLink;
+        resumeBtn.target = "_blank";
+        resumeBtn.rel = "noopener noreferrer";
       } else {
-        cvBtn.style.opacity = "0.5";
-        cvBtn.style.cursor = "default";
-        cvBtn.title = "CV coming soon";
-        cvBtn.addEventListener("click", e => e.preventDefault());
+        resumeBtn.style.opacity = "0.5";
+        resumeBtn.style.cursor = "default";
+        resumeBtn.title = "Resume coming soon";
+        resumeBtn.addEventListener("click", e => e.preventDefault());
       }
 
-      // Education cards
+      // Education cards (compact, inline)
       const eduContainer = document.getElementById("edu-cards");
       const gradCapPath = "M48 195.8l209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1C309 34.1 298.6 32 288 32s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160L0 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-260.2zm48 71.7L96 384c0 53 86 96 192 96s192-43 192-96l0-116.6-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z";
       C.education.forEach(ed => {
         const card = document.createElement("div");
-        card.className = "edu-card";
-        const iconWrap = document.createElement("div");
-        iconWrap.className = "edu-card__icon";
-        iconWrap.appendChild(svgIcon(gradCapPath, "0 0 576 512"));
+        card.className = "edu-chip";
+
+        // University logo or graduation cap icon
+        const logoWrap = document.createElement("div");
+        logoWrap.className = "edu-chip__logo";
+        if (C.universityLogo) {
+          const logoImg = document.createElement("img");
+          logoImg.src = C.universityLogo;
+          logoImg.alt = ed.school;
+          logoImg.referrerPolicy = "no-referrer";
+          logoWrap.appendChild(logoImg);
+        } else {
+          logoWrap.appendChild(svgIcon(gradCapPath, "0 0 576 512"));
+        }
+
+        const textWrap = document.createElement("div");
+        textWrap.className = "edu-chip__text";
         const title = document.createElement("p");
-        title.className = "edu-card__title";
+        title.className = "edu-chip__title";
         title.textContent = ed.degree;
         const sub = document.createElement("p");
-        sub.className = "edu-card__subtitle";
+        sub.className = "edu-chip__sub";
         sub.textContent = ed.school;
-        card.append(iconWrap, title, sub);
+        textWrap.append(title, sub);
+        card.append(logoWrap, textWrap);
         eduContainer.appendChild(card);
       });
 
-      // Projects
-      const projectContainer = document.getElementById("project-cards");
-      if (C.projects.length === 0) {
+      // Certificates
+      const certContainer = document.getElementById("cert-cards");
+      if (C.certificates.length === 0) {
         const placeholder = document.createElement("div");
         placeholder.className = "edu-card";
         placeholder.style.color = "var(--text-muted)";
         placeholder.style.fontStyle = "italic";
-        placeholder.innerHTML = "<p>Projects coming soon — stay tuned! 🚀</p>";
-        projectContainer.appendChild(placeholder);
+        placeholder.innerHTML = "<p>Certificates coming soon — stay tuned! 🎓</p>";
+        certContainer.appendChild(placeholder);
       } else {
-        C.projects.forEach(proj => {
-          const card = document.createElement("div");
-          card.className = "edu-card";
-          const title = document.createElement("p");
-          title.className = "edu-card__title";
-          title.textContent = proj.title;
-          const desc = document.createElement("p");
-          desc.className = "edu-card__subtitle";
-          desc.textContent = proj.description;
-          card.append(title, desc);
-          if (proj.url) {
-            card.style.cursor = "pointer";
-            card.addEventListener("click", () => window.open(proj.url, "_blank"));
-          }
-          projectContainer.appendChild(card);
-        });
-      }
-
-      // Certificates
-      const certSection = document.getElementById("certificates");
-      const certContainer = document.getElementById("cert-cards");
-      if (C.certificates.length > 0) {
-        certSection.style.display = "";
         C.certificates.forEach(cert => {
           const card = document.createElement("div");
           card.className = "edu-card";
@@ -263,6 +231,7 @@
             const img = document.createElement("img");
             img.src = cert.imageUrl;
             img.alt = cert.title;
+            img.referrerPolicy = "no-referrer";
             img.style.width = "100%";
             img.style.borderRadius = "8px";
             img.style.marginBottom = "10px";
@@ -276,41 +245,21 @@
         });
       }
 
-      // Contact cards
-      const contactGrid = document.getElementById("contact-grid");
-      // Email
-      const emailCard = document.createElement("a");
-      emailCard.href = `mailto:${C.email}`;
-      emailCard.className = "contact-card";
-      emailCard.id = "contact-email";
-      emailCard.innerHTML = `
-        <div class="contact-card__icon">
+      // Footer — Contact + Copyright
+      const footerContact = document.getElementById("footer-contact");
+      footerContact.innerHTML = `
+        <a href="mailto:${C.email}" class="footer__link">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z"/></svg>
-        </div>
-        <div>
-          <p class="contact-card__label">Email</p>
-          <p class="contact-card__value">${C.email}</p>
-        </div>`;
-      contactGrid.appendChild(emailCard);
-
-      // Phone
-      const phoneCard = document.createElement("a");
-      phoneCard.href = `tel:${C.phone}`;
-      phoneCard.className = "contact-card";
-      phoneCard.id = "contact-phone";
-      phoneCard.innerHTML = `
-        <div class="contact-card__icon">
+          ${C.email}
+        </a>
+        <a href="tel:${C.phone}" class="footer__link">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M160.2 25C152.3 6.1 131.7-3.9 112.1 1.4l-5.5 1.5c-64.6 17.6-119.8 80.2-103.7 156.4 37.1 175 174.8 312.7 349.8 349.8 76.3 16.2 138.8-39.1 156.4-103.7l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2C233.9 335.4 177.3 277 144.8 205.3L189 169.3c13.9-11.3 18.6-30.4 11.8-47L160.2 25z"/></svg>
-        </div>
-        <div>
-          <p class="contact-card__label">Phone</p>
-          <p class="contact-card__value">${C.phoneDisplay}</p>
-        </div>`;
-      contactGrid.appendChild(phoneCard);
+          ${C.phoneDisplay}
+        </a>
+      `;
 
-      // Footer
-      const footer = document.getElementById("footer");
-      footer.innerHTML = `<p>&copy; ${new Date().getFullYear()} <a href="${C.socials.find(s => s.platform === 'GitHub')?.url || '#'}" target="_blank" rel="noopener noreferrer">${C.name}</a>. All rights reserved.</p>`;
+      const footerCopy = document.getElementById("footer-copy");
+      footerCopy.innerHTML = `<p>&copy; ${new Date().getFullYear()} <a href="${C.socials.find(s => s.platform === 'GitHub')?.url || '#'}" target="_blank" rel="noopener noreferrer">${C.name}</a>. All rights reserved.</p>`;
 
       // ── Mobile menu toggle ──────────────────────────────────
       document.getElementById("menu-toggle").addEventListener("click", () => {
@@ -320,6 +269,27 @@
         link.addEventListener("click", () => {
           document.getElementById("nav-links").classList.remove("active");
         });
+      });
+
+      // ── Dark / Light mode toggle ────────────────────────────
+      const themeToggle = document.getElementById("theme-toggle");
+      const moonIcon = themeToggle.querySelector(".icon-moon");
+      const sunIcon = themeToggle.querySelector(".icon-sun");
+
+      function setTheme(dark) {
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+        moonIcon.style.display = dark ? "none" : "block";
+        sunIcon.style.display = dark ? "block" : "none";
+        localStorage.setItem("theme", dark ? "dark" : "light");
+      }
+
+      // Restore saved preference or default to light
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") setTheme(true);
+
+      themeToggle.addEventListener("click", () => {
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        setTheme(!isDark);
       });
     })();
   </script>
