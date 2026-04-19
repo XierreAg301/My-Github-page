@@ -80,3 +80,4 @@ const CONFIG = {
 
   resumeLink: "https://docs.google.com/document/d/1AM7y768XhlLBhpUdXyKJ0jTupsw81RwWdhvXz19u3yI/edit?usp=sharing"
 };
+export { CONFIG };
