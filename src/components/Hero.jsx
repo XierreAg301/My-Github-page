@@ -79,7 +79,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20">
       <div className="max-w-[1400px] mx-auto px-8 w-full xl:px-12">
-        <div className="grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-[1fr_540px] gap-12 lg:gap-20 items-center">
           {/* Left: Text content */}
           <div className="order-2 md:order-1 animate-fade-in-left" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
             {/* Terminal-style greeting */}
@@ -149,9 +149,9 @@ export default function Hero() {
           </div>
 
           {/* Right: Photo + Project highlights */}
-          <div className="order-1 lg:order-2 animate-fade-in-right flex flex-col items-center w-full max-w-[500px] mx-auto lg:mx-0" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
+          <div className="order-1 lg:order-2 animate-fade-in-right flex flex-col items-center w-full mx-auto lg:mx-0" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
             {/* Profile Picture */}
-            <div className="mb-12 relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-matrix-green shadow-matrix-lg bg-matrix-card z-10">
+            <div className="mb-14 relative w-52 h-52 sm:w-60 sm:h-60 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-matrix-green shadow-matrix-lg bg-matrix-card z-10 shrink-0">
               {CONFIG.avatar ? (
                 <img
                   src={CONFIG.avatar}
@@ -171,28 +171,28 @@ export default function Hero() {
 
             {/* Project Highlights (Spans full width, wider than picture) */}
             <div className="w-full">
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-10">
                 <div className="h-[1px] w-12 bg-matrix-green/50" />
-                <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-matrix-green/80 whitespace-nowrap">Project Highlights</h3>
+                <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-matrix-green/80 whitespace-nowrap">Project Highlights</h3>
                 <div className="h-[1px] flex-1 bg-gradient-to-r from-matrix-green/50 to-transparent" />
               </div>
               
-              <div className="relative pl-8 space-y-6">
+              <div className="relative pl-10 space-y-8">
                 {/* Vertical Line */}
-                <div className="absolute left-[8px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-matrix-green/40 via-matrix-green/20 to-transparent" />
+                <div className="absolute left-[12px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-matrix-green/40 via-matrix-green/20 to-transparent" />
                 
                 {highlightedProjects.map((project) => (
                   <a
                     key={project.title}
                     href="#projects"
                     onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
-                    className="group block relative border border-transparent hover:border-matrix-green/20 p-3 -m-3 rounded-xl transition-all duration-300"
+                    className="group block relative border border-transparent hover:border-matrix-green/30 p-4 -m-4 rounded-xl transition-all duration-300"
                   >
                     {/* Node Dot */}
-                    <div className="absolute top-[18px] left-[-16px] w-2.5 h-2.5 rounded-full bg-matrix-card border-[1.5px] border-matrix-green/70 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300" />
+                    <div className="absolute top-[22px] left-[-21px] w-3 h-3 rounded-full bg-matrix-card border-[1.5px] border-matrix-green/70 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300" />
                     
-                    <p className="text-base font-bold text-white leading-snug group-hover:text-matrix-green transition-colors">{project.title}</p>
-                    <p className="font-mono text-xs text-matrix-text-muted mt-1.5 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
+                    <p className="text-lg font-bold text-white leading-snug group-hover:text-matrix-green transition-colors">{project.title}</p>
+                    <p className="font-mono text-sm text-matrix-text-muted mt-2 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
                   </a>
                 ))}
               </div>
