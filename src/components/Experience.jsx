@@ -7,7 +7,6 @@ export default function Experience() {
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <div className="flex items-center gap-4 mb-12">
-          <span className="font-mono text-matrix-green text-sm">02.</span>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Experience</h2>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-matrix-green/30 to-transparent" />
         </div>

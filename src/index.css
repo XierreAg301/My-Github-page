@@ -58,11 +58,20 @@ body::after {
   z-index: 9999;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 255, 65, 0.015) 0px,
-    rgba(0, 255, 65, 0.015) 1px,
+    rgba(0, 255, 65, 0.008) 0px,
+    rgba(0, 255, 65, 0.008) 1px,
     transparent 1px,
-    transparent 3px
+    transparent 4px
   );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 a {

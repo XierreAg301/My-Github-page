@@ -54,16 +54,16 @@ export default function Navbar() {
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="font-mono text-matrix-green text-lg tracking-wider hover:text-white transition-colors duration-300 group"
+          className="font-mono text-matrix-green text-base tracking-wide hover:text-white transition-colors duration-300 group"
         >
           <span className="text-matrix-green/50 group-hover:text-matrix-green transition-colors">&gt;_</span>
           {' '}aaron
-          <span className="animate-blink text-matrix-green">|</span>
+          <span className="text-matrix-green/70">.</span>
         </a>
 
         {/* Desktop Links */}
         <ul className="hidden md:flex items-center gap-1">
-          {navLinks.map((link, i) => (
+          {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
@@ -74,7 +74,6 @@ export default function Navbar() {
                     : 'text-matrix-text-muted hover:text-matrix-green'
                 }`}
               >
-                <span className="text-matrix-green/50 text-xs mr-1">0{i + 1}.</span>
                 {link.label}
                 <span
                   className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-matrix-green transition-all duration-300 rounded-full ${
@@ -109,14 +108,13 @@ export default function Navbar() {
         }`}
       >
         <div className="bg-matrix-dark/95 backdrop-blur-xl px-6 py-4 space-y-2">
-          {navLinks.map((link, i) => (
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
               className="block font-mono text-sm text-matrix-text-muted hover:text-matrix-green transition-colors py-2"
             >
-              <span className="text-matrix-green/50 mr-2">0{i + 1}.</span>
               {link.label}
             </a>
           ))}

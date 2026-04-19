@@ -7,8 +7,8 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         {/* Big CTA */}
         <div className="text-center mb-16">
-          <p className="font-mono text-matrix-green text-sm mb-4">05. What's Next?</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Get In Touch</h2>
+          <p className="font-mono text-matrix-green text-sm mb-4">What's Next?</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-matrix-green mb-6">Get In Touch</h2>
           <p className="text-matrix-text-muted max-w-lg mx-auto mb-8 leading-relaxed">
             I'm currently looking for new opportunities. Whether you have a question, a project idea, or just want to say hi — my inbox is always open.
           </p>
@@ -43,14 +43,14 @@ export default function Footer() {
         </div>
 
         {/* Social links */}
-        <div className="flex items-center justify-center gap-6 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
           {CONFIG.socials.map((social) => (
             <a
               key={social.platform}
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-matrix-text-muted hover:text-matrix-green transition-all duration-300 hover:-translate-y-1"
+              className="px-3 py-2 rounded-lg border border-matrix-green/25 text-matrix-green/90 bg-matrix-green/5 hover:bg-matrix-green/10 hover:border-matrix-green/50 transition-all duration-300"
               aria-label={social.platform}
             >
               <span className="font-mono text-xs">{social.platform}</span>

@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CONFIG } from '../../config.js';
 
-function ProjectCard({ project, index }) {
-  const [isHovered, setIsHovered] = useState(false);
+function ProjectCard({ project }) {
 
   return (
     <div
-      className="group relative p-6 rounded-xl border border-matrix-border bg-matrix-card/50 backdrop-blur-sm transition-all duration-500 hover:border-matrix-green/40 hover:bg-matrix-card hover:shadow-card-hover hover:-translate-y-2"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="group relative p-6 rounded-xl border border-matrix-border bg-matrix-card/50 backdrop-blur-sm transition-all duration-300 hover:border-matrix-green/35 hover:bg-matrix-card hover:-translate-y-1"
     >
       {/* Top bar */}
       <div className="flex items-center justify-between mb-4">
@@ -53,19 +50,6 @@ function ProjectCard({ project, index }) {
         ))}
       </div>
 
-      {/* Scan line animation on hover */}
-      {isHovered && (
-        <div
-          className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-matrix-green/30 to-transparent pointer-events-none"
-          style={{ animation: 'scanLine 2s linear infinite' }}
-        />
-      )}
-
-      {/* Corner brackets */}
-      <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-matrix-green/0 group-hover:border-matrix-green/30 transition-colors duration-500" />
-      <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-matrix-green/0 group-hover:border-matrix-green/30 transition-colors duration-500" />
-      <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-matrix-green/0 group-hover:border-matrix-green/30 transition-colors duration-500" />
-      <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-matrix-green/0 group-hover:border-matrix-green/30 transition-colors duration-500" />
     </div>
   );
 }
@@ -76,7 +60,6 @@ export default function Projects() {
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <div className="flex items-center gap-4 mb-4">
-          <span className="font-mono text-matrix-green text-sm">03.</span>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Projects</h2>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-matrix-green/30 to-transparent" />
         </div>
@@ -88,7 +71,7 @@ export default function Projects() {
         {/* Project grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {CONFIG.projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
+            <ProjectCard key={index} project={project} />
           ))}
         </div>
       </div>

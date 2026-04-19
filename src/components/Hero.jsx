@@ -74,11 +74,12 @@ function TypingEffect({ texts }) {
 
 export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const highlightedProjects = CONFIG.projects.slice(0, 3);
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20">
       <div className="max-w-6xl mx-auto px-6 w-full">
-        <div className="grid md:grid-cols-[1fr_300px] gap-12 lg:gap-20 items-center">
+        <div className="grid md:grid-cols-[1fr_360px] gap-12 lg:gap-16 items-center">
           {/* Left: Text content */}
           <div className="order-2 md:order-1 animate-fade-in-left" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
             {/* Terminal-style greeting */}
@@ -87,7 +88,7 @@ export default function Hero() {
             </p>
 
             {/* Name */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-3 leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
               {CONFIG.name.split(' ').slice(0, 2).join(' ')}
               <br />
               <span className="text-matrix-text-muted">{CONFIG.name.split(' ').slice(2).join(' ')}</span>
@@ -100,7 +101,7 @@ export default function Hero() {
 
             {/* Short bio */}
             <p className="text-matrix-text-muted text-base leading-relaxed max-w-lg mb-8">
-              {CONFIG.summary.substring(0, 200)}...
+              {CONFIG.summary.substring(0, 170)}...
             </p>
 
             {/* CTA Buttons */}
@@ -109,20 +110,18 @@ export default function Hero() {
                 href={CONFIG.resumeLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-3 px-8 py-3.5 font-mono text-sm text-matrix-black bg-matrix-green rounded-lg overflow-hidden transition-all duration-300 hover:shadow-matrix-glow hover:scale-105"
+                className="inline-flex items-center gap-3 px-7 py-3 font-mono text-sm text-matrix-black bg-matrix-green rounded-lg transition-all duration-300 hover:shadow-matrix hover:-translate-y-0.5"
               >
-                <span className="relative z-10 font-semibold tracking-wide">See My Resume</span>
-                <svg className="relative z-10 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="font-semibold tracking-wide">See My Resume</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
               </a>
 
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                className="inline-flex items-center gap-3 px-8 py-3.5 font-mono text-sm text-matrix-green border border-matrix-green/30 rounded-lg transition-all duration-300 hover:bg-matrix-green/10 hover:border-matrix-green/60 hover:shadow-matrix"
+                className="inline-flex items-center gap-3 px-7 py-3 font-mono text-sm text-matrix-green border border-matrix-green/35 rounded-lg transition-all duration-300 hover:bg-matrix-green/10"
               >
                 Get In Touch
               </a>
@@ -138,7 +137,7 @@ export default function Hero() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative w-11 h-11 flex items-center justify-center rounded-lg border border-matrix-border text-matrix-text-muted transition-all duration-300 hover:text-matrix-green hover:border-matrix-green/40 hover:shadow-matrix hover:-translate-y-1 lightning-hover"
+                    className="group relative w-11 h-11 flex items-center justify-center rounded-lg border border-matrix-border text-matrix-text-muted transition-all duration-300 hover:text-matrix-green hover:border-matrix-green/40 hover:-translate-y-0.5"
                     aria-label={social.platform}
                     title={social.platform}
                   >
@@ -149,28 +148,18 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Photo */}
-          <div className="order-1 md:order-2 flex justify-center animate-fade-in-right" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-            <div className="relative group">
-              {/* Rotating neon ring */}
-              <div className="absolute -inset-3 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background: 'conic-gradient(from 0deg, #00ff41, #003d10, #00ff41, #00e5ff, #00ff41)',
-                  animation: 'spin 6s linear infinite',
-                  filter: 'blur(3px)',
-                }}
-              />
-
-              {/* Photo container */}
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-matrix-dark bg-matrix-card">
+          {/* Right: Photo + Project highlights */}
+          <div className="order-1 md:order-2 animate-fade-in-right" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
+            <div className="rounded-2xl border border-matrix-border bg-matrix-card/60 p-5 backdrop-blur-sm">
+              <div className="mx-auto mb-5 relative w-52 h-52 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-matrix-green/40 bg-matrix-card">
                 {CONFIG.avatar ? (
                   <img
                     src={CONFIG.avatar}
                     alt={CONFIG.name}
                     referrerPolicy="no-referrer"
                     className={`w-full h-full object-cover transition-all duration-700 ${
-                      imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                    } group-hover:scale-105`}
+                      imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                    }`}
                     onLoad={() => setImageLoaded(true)}
                   />
                 ) : (
@@ -178,32 +167,32 @@ export default function Hero() {
                     <span className="text-matrix-green font-mono text-6xl">A</span>
                   </div>
                 )}
-
-                {/* Green overlay on hover */}
-                <div className="absolute inset-0 bg-matrix-green/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay" />
               </div>
 
-              {/* Floating binary bits around photo */}
-              <div className="absolute -top-4 -right-4 text-matrix-green/30 font-mono text-xs animate-float">01</div>
-              <div className="absolute -bottom-2 -left-6 text-matrix-green/20 font-mono text-xs animate-float" style={{ animationDelay: '2s' }}>10</div>
-              <div className="absolute top-1/2 -right-8 text-matrix-green/20 font-mono text-xs animate-float" style={{ animationDelay: '4s' }}>11</div>
+              <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-matrix-green/80 mb-3">Project Highlights</h3>
+              <div className="space-y-3">
+                {highlightedProjects.map((project) => (
+                  <a
+                    key={project.title}
+                    href="#projects"
+                    onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
+                    className="block rounded-lg border border-matrix-border px-3 py-2.5 transition-colors duration-300 hover:border-matrix-green/40"
+                  >
+                    <p className="text-sm text-white leading-snug">{project.title}</p>
+                    <p className="font-mono text-[11px] text-matrix-green/70 mt-1">{project.role}</p>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-matrix-text-muted animate-float">
-          <span className="font-mono text-xs tracking-widest">SCROLL</span>
-          <div className="w-[1px] h-8 bg-gradient-to-b from-matrix-green/50 to-transparent" />
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-matrix-text-muted">
+          <div className="w-[2px] h-10 bg-gradient-to-b from-matrix-green/70 to-transparent" />
+          <div className="w-1.5 h-1.5 rounded-full bg-matrix-green/70 animate-pulse" />
         </div>
       </div>
-
-      {/* CSS for spin animation */}
-      <style>{`
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </section>
   );
 }

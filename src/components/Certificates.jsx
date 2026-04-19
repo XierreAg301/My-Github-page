@@ -8,7 +8,6 @@ export default function Certificates() {
     <section id="certificates" className="relative py-24">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center gap-4 mb-12">
-          <span className="font-mono text-matrix-green text-sm">04.</span>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Certificates</h2>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-matrix-green/30 to-transparent" />
         </div>

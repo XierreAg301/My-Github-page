@@ -20,7 +20,6 @@ const CONFIG = {
     "Backend Specialist",
     "Cybersecurity Enthusiast",
     "AI Agent Developer",
-    "Game Engine Architect",
   ],
 
   // ── Social Links ────────────────────────────────────────────
