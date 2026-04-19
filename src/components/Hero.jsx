@@ -78,8 +78,8 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20">
-      <div className="max-w-6xl mx-auto px-6 w-full">
-        <div className="grid md:grid-cols-[1fr_360px] gap-12 lg:gap-16 items-center">
+      <div className="max-w-[1400px] mx-auto px-8 w-full xl:px-12">
+        <div className="grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-20 items-center">
           {/* Left: Text content */}
           <div className="order-2 md:order-1 animate-fade-in-left" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
             {/* Terminal-style greeting */}
@@ -88,10 +88,10 @@ export default function Hero() {
             </p>
 
             {/* Name */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-3 leading-tight">
               {CONFIG.name.split(' ').slice(0, 2).join(' ')}
               <br />
-              <span className="text-matrix-text-muted">{CONFIG.name.split(' ').slice(2).join(' ')}</span>
+              <span className="text-matrix-green border-r-2 border-matrix-green pr-2">{CONFIG.name.split(' ').slice(2).join(' ')}</span>
             </h1>
 
             {/* Typing effect */}
@@ -121,9 +121,9 @@ export default function Hero() {
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                className="inline-flex items-center gap-3 px-7 py-3 font-mono text-sm text-matrix-green border border-matrix-green/35 rounded-lg transition-all duration-300 hover:bg-matrix-green/10"
+                className="inline-flex items-center gap-3 px-8 py-3.5 font-mono text-[15px] font-bold text-matrix-green border border-matrix-green/40 rounded-lg transition-all duration-300 hover:bg-matrix-green/10 shadow-matrix"
               >
-                Get In Touch
+                Contact Me
               </a>
             </div>
 
@@ -149,9 +149,9 @@ export default function Hero() {
           </div>
 
           {/* Right: Photo + Project highlights */}
-          <div className="order-1 md:order-2 animate-fade-in-right" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-            <div className="rounded-2xl border border-matrix-border bg-matrix-card/60 p-5 backdrop-blur-sm">
-              <div className="mx-auto mb-5 relative w-52 h-52 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-matrix-green/40 bg-matrix-card">
+          <div className="order-1 lg:order-2 animate-fade-in-right" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
+            <div className="rounded-3xl border border-matrix-border bg-matrix-card/80 p-8 shadow-card-hover backdrop-blur-md">
+              <div className="mx-auto mb-8 relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-matrix-green shadow-matrix-lg bg-matrix-card">
                 {CONFIG.avatar ? (
                   <img
                     src={CONFIG.avatar}
@@ -185,12 +185,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-matrix-text-muted">
-          <div className="w-[2px] h-10 bg-gradient-to-b from-matrix-green/70 to-transparent" />
-          <div className="w-1.5 h-1.5 rounded-full bg-matrix-green/70 animate-pulse" />
         </div>
       </div>
     </section>

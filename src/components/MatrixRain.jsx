@@ -28,7 +28,7 @@ export default function MatrixRain({ scrollProgress = 0 }) {
     const columns = Math.floor(canvas.width / columnSpacing);
     const drops = Array.from({ length: columns }, () => ({
       y: Math.random() * -canvas.height,
-      speed: 18 + Math.random() * 16,
+      speed: 35 + Math.random() * 25,
       length: 9 + Math.floor(Math.random() * 7),
       char: chars[Math.floor(Math.random() * chars.length)],
     }));
@@ -70,7 +70,7 @@ export default function MatrixRain({ scrollProgress = 0 }) {
         drop.y += drop.speed * dt;
         if (drop.y - drop.length * fontSize > canvas.height + 20) {
           drop.y = -Math.random() * canvas.height * 0.6;
-          drop.speed = 16 + Math.random() * 14;
+          drop.speed = 30 + Math.random() * 20;
           drop.length = 8 + Math.floor(Math.random() * 6);
           drop.char = chars[Math.floor(Math.random() * chars.length)];
         }
