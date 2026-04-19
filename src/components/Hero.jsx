@@ -149,48 +149,50 @@ export default function Hero() {
           </div>
 
           {/* Right: Photo + Project highlights */}
-          <div className="order-1 lg:order-2 animate-fade-in-right" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-            <div className="rounded-3xl border border-matrix-border bg-matrix-card/80 p-8 shadow-card-hover backdrop-blur-md">
-              <div className="mx-auto mb-8 relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-matrix-green shadow-matrix-lg bg-matrix-card">
-                {CONFIG.avatar ? (
-                  <img
-                    src={CONFIG.avatar}
-                    alt={CONFIG.name}
-                    referrerPolicy="no-referrer"
-                    className={`w-full h-full object-cover transition-all duration-700 ${
-                      imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-                    }`}
-                    onLoad={() => setImageLoaded(true)}
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-matrix-card">
-                    <span className="text-matrix-green font-mono text-6xl">A</span>
-                  </div>
-                )}
-              </div>
+          <div className="order-1 lg:order-2 animate-fade-in-right flex flex-col items-center w-full max-w-[500px] mx-auto lg:mx-0" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
+            {/* Profile Picture */}
+            <div className="mb-12 relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-matrix-green shadow-matrix-lg bg-matrix-card z-10">
+              {CONFIG.avatar ? (
+                <img
+                  src={CONFIG.avatar}
+                  alt={CONFIG.name}
+                  referrerPolicy="no-referrer"
+                  className={`w-full h-full object-cover transition-all duration-700 ${
+                    imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                  }`}
+                  onLoad={() => setImageLoaded(true)}
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-matrix-card">
+                  <span className="text-matrix-green font-mono text-6xl">A</span>
+                </div>
+              )}
+            </div>
 
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-[1px] w-8 bg-matrix-green/50" />
-                <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-matrix-green/80">Project Highlights</h3>
+            {/* Project Highlights (Spans full width, wider than picture) */}
+            <div className="w-full">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-[1px] w-12 bg-matrix-green/50" />
+                <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-matrix-green/80 whitespace-nowrap">Project Highlights</h3>
                 <div className="h-[1px] flex-1 bg-gradient-to-r from-matrix-green/50 to-transparent" />
               </div>
               
-              <div className="relative pl-7 space-y-5">
+              <div className="relative pl-8 space-y-6">
                 {/* Vertical Line */}
-                <div className="absolute left-[7px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-matrix-green/50 via-matrix-green/20 to-transparent" />
+                <div className="absolute left-[8px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-matrix-green/40 via-matrix-green/20 to-transparent" />
                 
                 {highlightedProjects.map((project) => (
                   <a
                     key={project.title}
                     href="#projects"
                     onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
-                    className="group block relative border border-transparent hover:border-matrix-green/20 p-2.5 -m-2.5 rounded-lg transition-all duration-300"
+                    className="group block relative border border-transparent hover:border-matrix-green/20 p-3 -m-3 rounded-xl transition-all duration-300"
                   >
                     {/* Node Dot */}
-                    <div className="absolute top-4 left-[-15px] w-[9px] h-[9px] rounded-full bg-matrix-card border-[1.5px] border-matrix-green/70 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300" />
+                    <div className="absolute top-[18px] left-[-16px] w-2.5 h-2.5 rounded-full bg-matrix-card border-[1.5px] border-matrix-green/70 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300" />
                     
-                    <p className="text-[15px] font-semibold text-white leading-snug group-hover:text-matrix-green transition-colors">{project.title}</p>
-                    <p className="font-mono text-[11px] text-matrix-text-muted mt-1 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
+                    <p className="text-base font-bold text-white leading-snug group-hover:text-matrix-green transition-colors">{project.title}</p>
+                    <p className="font-mono text-xs text-matrix-text-muted mt-1.5 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
                   </a>
                 ))}
               </div>
