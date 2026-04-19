@@ -26,13 +26,13 @@ export default function Projects() {
                 <div className="relative font-mono text-sm text-matrix-text-muted pt-1 md:text-right">
                   <span className="relative z-10">{project.date}</span>
                   {/* Timeline dot */}
-                  <div className="absolute right-0 md:-right-[12.5px] top-2 w-[8px] h-[8px] rounded-full bg-matrix-dark border-2 border-matrix-green/50 group-hover:border-matrix-green group-hover:shadow-matrix-glow transition-all duration-300 hidden md:block" />
+                  <div className="absolute right-0 md:-right-[4px] top-1.5 w-2.5 h-2.5 rounded-full bg-matrix-card border-[1.5px] border-matrix-green/50 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300 hidden md:block" />
                   {/* Glow on active */}
-                  <div className="absolute right-0 md:-right-[16.5px] top-0 w-[16px] h-[16px] rounded-full bg-matrix-green/0 group-hover:bg-matrix-green/20 transition-all duration-500 hidden md:block" />
+                  <div className="absolute right-0 md:-right-[9px] top-0.5 w-[20px] h-[20px] rounded-full bg-matrix-green/0 group-hover:bg-matrix-green/20 transition-all duration-500 hidden md:block" />
                 </div>
 
                 {/* Content card */}
-                <div className="relative p-7 rounded-xl border border-matrix-border bg-matrix-card/50 backdrop-blur-sm transition-all duration-500 hover:border-matrix-green/40 hover:shadow-matrix-glow hover:bg-matrix-card ml-6 md:ml-0">
+                <div className="relative p-7 rounded-xl border border-matrix-border bg-matrix-card/40 backdrop-blur-sm transition-all duration-500 group-hover:border-matrix-green/40 group-hover:shadow-matrix-glow group-hover:bg-matrix-card ml-6 md:ml-0 group-hover:-translate-y-1">
                   
                   {/* Top Header: Title & Role */}
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
