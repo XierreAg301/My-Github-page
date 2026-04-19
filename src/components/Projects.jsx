@@ -1,78 +1,79 @@
 import React from 'react';
 import { CONFIG } from '../../config.js';
 
-function ProjectCard({ project }) {
-
-  return (
-    <div
-      className="group relative p-6 rounded-xl border border-matrix-border bg-matrix-card/50 backdrop-blur-sm transition-all duration-300 hover:border-matrix-green/35 hover:bg-matrix-card hover:-translate-y-1"
-    >
-      {/* Top bar */}
-      <div className="flex items-center justify-between mb-4">
-        {/* Folder icon */}
-        <div className="w-12 h-12 rounded-lg bg-matrix-green/10 border border-matrix-green/20 flex items-center justify-center text-matrix-green transition-colors duration-300 group-hover:bg-matrix-green/20 group-hover:border-matrix-green/40">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-          </svg>
-        </div>
-
-        {/* Featured badge */}
-        {project.featured && (
-          <span className="font-mono text-xs text-matrix-green/60 border border-matrix-green/20 px-2 py-0.5 rounded-full">
-            Featured
-          </span>
-        )}
-      </div>
-
-      {/* Title & Role */}
-      <h3 className="text-lg font-bold text-white mb-1 group-hover:text-matrix-green transition-colors duration-300">
-        {project.title}
-      </h3>
-      <p className="text-matrix-green/70 font-mono text-xs mb-1">{project.role}</p>
-      <p className="text-matrix-text-dim font-mono text-xs mb-4">{project.date}</p>
-
-      {/* Description */}
-      <ul className="space-y-2 mb-6">
-        {project.description.slice(0, 2).map((desc, i) => (
-          <li key={i} className="flex gap-2 text-sm text-matrix-text-muted leading-relaxed">
-            <span className="text-matrix-green mt-1 flex-shrink-0 text-xs">▹</span>
-            <span className="line-clamp-2">{desc}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* Tech tags */}
-      <div className="flex flex-wrap gap-1.5 mt-auto">
-        {project.technologies.map((tech, i) => (
-          <span key={i} className="text-matrix-green/70 font-mono text-[11px]">
-            {tech}{i < project.technologies.length - 1 && <span className="text-matrix-text-dim ml-1.5">·</span>}
-          </span>
-        ))}
-      </div>
-
-    </div>
-  );
-}
-
 export default function Projects() {
   return (
     <section id="projects" className="relative py-24">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
-        <div className="flex items-center gap-4 mb-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">Projects</h2>
+        <div className="flex items-center gap-4 mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">Projects & Achievements</h2>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-matrix-green/30 to-transparent" />
         </div>
 
-        <p className="text-matrix-text-muted mb-12 max-w-2xl">
-          A selection of projects I've built — from automated systems and game engines to API integrations and cloud architectures.
-        </p>
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical line */}
+          <div className="absolute left-0 md:left-[180px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-matrix-green/40 via-matrix-green/20 to-transparent" />
 
-        {/* Project grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CONFIG.projects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
-          ))}
+          <div className="space-y-12">
+            {CONFIG.projects.map((project, index) => (
+              <div
+                key={index}
+                className="group relative grid md:grid-cols-[180px_1fr] gap-4 md:gap-8"
+              >
+                {/* Date column */}
+                <div className="relative font-mono text-sm text-matrix-text-muted pt-1 md:text-right">
+                  <span className="relative z-10">{project.date}</span>
+                  {/* Timeline dot */}
+                  <div className="absolute right-0 md:-right-[12.5px] top-2 w-[8px] h-[8px] rounded-full bg-matrix-dark border-2 border-matrix-green/50 group-hover:border-matrix-green group-hover:shadow-matrix-glow transition-all duration-300 hidden md:block" />
+                  {/* Glow on active */}
+                  <div className="absolute right-0 md:-right-[16.5px] top-0 w-[16px] h-[16px] rounded-full bg-matrix-green/0 group-hover:bg-matrix-green/20 transition-all duration-500 hidden md:block" />
+                </div>
+
+                {/* Content card */}
+                <div className="relative p-7 rounded-xl border border-matrix-border bg-matrix-card/50 backdrop-blur-sm transition-all duration-500 hover:border-matrix-green/40 hover:shadow-matrix-glow hover:bg-matrix-card ml-6 md:ml-0">
+                  
+                  {/* Top Header: Title & Role */}
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1 group-hover:text-matrix-green transition-colors duration-300 flex items-center gap-2">
+                        {project.title}
+                        {project.featured && (
+                          <span className="font-mono text-[10px] uppercase text-matrix-green/60 border border-matrix-green/20 px-2 py-0.5 rounded-full ml-2">
+                            Featured
+                          </span>
+                        )}
+                      </h3>
+                      <p className="text-matrix-green/80 font-mono text-sm">
+                        {project.role}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Description bullets */}
+                  <ul className="space-y-2.5 mb-6">
+                    {project.description.map((desc, i) => (
+                      <li key={i} className="flex gap-3 text-sm text-matrix-text-muted leading-relaxed">
+                        <span className="text-matrix-green mt-1 flex-shrink-0 text-xs">▹</span>
+                        {desc}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, i) => (
+                      <span key={i} className="px-2.5 py-1 rounded-md bg-matrix-green/5 border border-matrix-green/10 text-matrix-green/70 font-mono text-[11px] group-hover:border-matrix-green/30 transition-colors">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

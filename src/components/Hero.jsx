@@ -169,17 +169,28 @@ export default function Hero() {
                 )}
               </div>
 
-              <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-matrix-green/80 mb-3">Project Highlights</h3>
-              <div className="space-y-3">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-[1px] w-8 bg-matrix-green/50" />
+                <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-matrix-green/80">Project Highlights</h3>
+                <div className="h-[1px] flex-1 bg-gradient-to-r from-matrix-green/50 to-transparent" />
+              </div>
+              
+              <div className="relative pl-7 space-y-5">
+                {/* Vertical Line */}
+                <div className="absolute left-[7px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-matrix-green/50 via-matrix-green/20 to-transparent" />
+                
                 {highlightedProjects.map((project) => (
                   <a
                     key={project.title}
                     href="#projects"
                     onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
-                    className="block rounded-lg border border-matrix-border px-3 py-2.5 transition-colors duration-300 hover:border-matrix-green/40"
+                    className="group block relative border border-transparent hover:border-matrix-green/20 p-2.5 -m-2.5 rounded-lg transition-all duration-300"
                   >
-                    <p className="text-sm text-white leading-snug">{project.title}</p>
-                    <p className="font-mono text-[11px] text-matrix-green/70 mt-1">{project.role}</p>
+                    {/* Node Dot */}
+                    <div className="absolute top-4 left-[-15px] w-[9px] h-[9px] rounded-full bg-matrix-card border-[1.5px] border-matrix-green/70 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300" />
+                    
+                    <p className="text-[15px] font-semibold text-white leading-snug group-hover:text-matrix-green transition-colors">{project.title}</p>
+                    <p className="font-mono text-[11px] text-matrix-text-muted mt-1 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
                   </a>
                 ))}
               </div>
