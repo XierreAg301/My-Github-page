@@ -177,22 +177,22 @@ export default function Hero() {
                 <div className="h-[1px] flex-1 bg-gradient-to-r from-matrix-green/50 to-transparent" />
               </div>
               
-              <div className="relative pl-10 space-y-8">
+              <div className="relative pl-10 space-y-3">
                 {/* Vertical Line */}
-                <div className="absolute left-[12px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-matrix-green/40 via-matrix-green/20 to-transparent" />
+                <div className="absolute left-[10px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-matrix-green/40 via-matrix-green/20 to-transparent" />
                 
                 {highlightedProjects.map((project) => (
                   <a
                     key={project.title}
                     href="#projects"
                     onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
-                    className="group block relative border border-transparent hover:border-matrix-green/30 p-4 -m-4 rounded-xl transition-all duration-300"
+                    className="group block relative border border-transparent hover:border-matrix-green/30 p-4 rounded-xl transition-all duration-300"
                   >
                     {/* Node Dot */}
-                    <div className="absolute top-[22px] left-[-21px] w-3 h-3 rounded-full bg-matrix-card border-[1.5px] border-matrix-green/70 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300" />
+                    <div className="absolute top-[28px] left-[-35px] w-3 h-3 rounded-full bg-matrix-card border-[2px] border-matrix-green/70 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300" />
                     
                     <p className="text-lg font-bold text-white leading-snug group-hover:text-matrix-green transition-colors">{project.title}</p>
-                    <p className="font-mono text-sm text-matrix-text-muted mt-2 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
+                    <p className="font-mono text-sm text-matrix-text-muted mt-1.5 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
                   </a>
                 ))}
               </div>

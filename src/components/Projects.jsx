@@ -23,7 +23,7 @@ export default function Projects() {
                 className="group relative grid md:grid-cols-[180px_1fr] gap-4 md:gap-8"
               >
                 {/* Date column */}
-                <div className="relative font-mono text-sm text-matrix-text-muted pt-1 md:text-right">
+                <div className="relative font-mono text-sm text-matrix-text-muted pt-1 md:text-right md:pr-10">
                   <span className="relative z-10">{project.date}</span>
                   {/* Timeline dot */}
                   <div className="absolute right-0 md:-right-[4px] top-1.5 w-2.5 h-2.5 rounded-full bg-matrix-card border-[1.5px] border-matrix-green/50 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300 hidden md:block" />
