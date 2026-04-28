@@ -48,12 +48,12 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 py-4 flex items-center justify-between">
         {/* Logo */}
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="font-mono text-matrix-green text-base tracking-wide hover:text-white transition-colors duration-300 group"
+          className="font-cascadia text-matrix-green text-base tracking-wide hover:text-white transition-colors duration-300 group"
         >
           <span className="text-matrix-green/50 group-hover:text-matrix-green transition-colors">&gt;_</span>
           {' '}aaron
@@ -61,16 +61,16 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex items-center gap-1">
+        <ul className="hidden md:flex items-center gap-2">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`relative px-4 py-2 font-mono text-sm tracking-wide transition-all duration-300 rounded-lg group ${
+                className={`relative px-5 py-2 font-cascadia text-sm tracking-wide transition-all duration-300 rounded-lg group ${
                   activeSection === link.href.replace('#', '')
                     ? 'text-matrix-green'
-                    : 'text-matrix-text-muted hover:text-matrix-green'
+                    : 'text-white/70 hover:text-matrix-green'
                 }`}
               >
                 {link.label}
@@ -106,13 +106,13 @@ export default function Navbar() {
           mobileOpen ? 'max-h-96 border-b border-matrix-green/10' : 'max-h-0'
         }`}
       >
-        <div className="bg-matrix-dark/95 backdrop-blur-xl px-6 py-4 space-y-2">
+        <div className="bg-matrix-dark/95 backdrop-blur-xl px-8 py-4 space-y-2">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="block font-mono text-sm text-matrix-text-muted hover:text-matrix-green transition-colors py-2"
+              className="block font-cascadia text-sm text-white/70 hover:text-matrix-green transition-colors py-3 px-4 rounded-lg hover:bg-matrix-green/5"
             >
               {link.label}
             </a>

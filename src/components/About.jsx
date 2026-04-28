@@ -3,18 +3,18 @@ import { CONFIG } from '../../config.js';
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="about" className="relative py-16 sm:py-24 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-2 sm:px-6">
         {/* Section header */}
         <div className="flex items-center gap-4 mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-white">About Me</h2>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-matrix-green/30 to-transparent" />
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1fr] gap-12">
+        <div className="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
           {/* Left: Summary */}
           <div className="space-y-6">
-            <p className="text-matrix-text-muted leading-relaxed">
+            <p className="text-white/60 leading-relaxed">
               {CONFIG.summary}
             </p>
 
@@ -44,7 +44,7 @@ export default function About() {
                   </div>
                   <div>
                     <p className="text-white font-semibold text-sm">{ed.degree}</p>
-                    <p className="text-matrix-text-muted text-sm">{ed.school}</p>
+                    <p className="text-white/50 text-sm">{ed.school}</p>
                   </div>
                 </div>
               ))}
@@ -74,24 +74,24 @@ export default function About() {
                 <div className="w-3 h-3 rounded-full bg-red-500/70" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
                 <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                <span className="ml-2 text-matrix-text-dim">terminal</span>
+                <span className="ml-2 text-white/30">terminal</span>
               </div>
               <div className="space-y-1">
-                <p className="text-matrix-text-muted">
+                <p className="text-white/50">
                   <span className="text-matrix-green">aaron@matrix</span>
-                  <span className="text-matrix-text-dim">:</span>
+                  <span className="text-white/30">:</span>
                   <span className="text-blue-400">~</span>
-                  <span className="text-matrix-text-dim">$</span>
+                  <span className="text-white/30">$</span>
                   <span className="text-white ml-2">cat skills.txt</span>
                 </p>
                 <p className="text-matrix-green/70">
                   ✓ {CONFIG.skills.length} technologies loaded
                 </p>
-                <p className="text-matrix-text-muted">
+                <p className="text-white/50">
                   <span className="text-matrix-green">aaron@matrix</span>
-                  <span className="text-matrix-text-dim">:</span>
+                  <span className="text-white/30">:</span>
                   <span className="text-blue-400">~</span>
-                  <span className="text-matrix-text-dim">$</span>
+                  <span className="text-white/30">$</span>
                   <span className="text-white ml-2 animate-blink">|</span>
                 </p>
               </div>

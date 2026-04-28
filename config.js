@@ -52,7 +52,7 @@ const CONFIG = {
     "PHP", "Laravel", "C#", "Java", "Python",
     "Unity", "p5.js", "Firebase", "Supabase",
     "Google Cloud", "HTML & CSS", "Tailwind CSS",
-    "Git", "REST APIs", "Cybersecurity",
+    "Git", "REST APIs", "Cybersecurity", "PostgreSQL",
   ],
 
   // ── Education ───────────────────────────────────────────────
@@ -66,6 +66,18 @@ const CONFIG = {
   // ── Experience / Projects ──────────────────────────────────
   projects: [
     {
+      title: "Procurement and Inventory System",
+      role: "Database Manager & Backend Developer",
+      date: "August – November 2025",
+      technologies: ["PHP", "PostgreSQL"],
+      description: [
+        "Architected a robust backend using PHP and PostgreSQL to power a comprehensive procurement and inventory system initially deployed for the POCC Cubao branch, with scalable support for multiple regional branches.",
+        "Developed distinct, role-based dashboards and secure authentication flows for Admin Assistants, Procurement Managers, and Suppliers, ensuring targeted data visibility for stock management and pending requests.",
+        "Integrated dynamic PDF generation capabilities to instantly compile detailed inventory reports and standardized purchase requests, optimizing operational reporting across all managed locations.",
+      ],
+      featured: true,
+    },
+    {
       title: "Automatic Welfare Check-In System (AWCS)",
       role: "Backend Developer",
       date: "August – November 2025",
@@ -75,7 +87,7 @@ const CONFIG = {
         "Designed a responsive, user-friendly dashboard for emergency responders utilizing Laravel Blade, HTML, and CSS to seamlessly visualize real-time safety statuses.",
         "Integrated Supabase as a cloud database solution within a Laravel (PHP) architecture, ensuring secure and immediate processing of incoming SMS and voice call responses.",
       ],
-      featured: true,
+      featured: false,
     },
     {
       title: "BugHunt: Debug or Die!",
@@ -87,7 +99,7 @@ const CONFIG = {
         "Architected and managed a scalable backend database using Firebase to efficiently store player progression, game states, and real-time data.",
         "Engineered secure user authentication by implementing Google Single Sign-On (SSO) to seamlessly handle player login and registration within the Unity foundation.",
       ],
-      featured: true,
+      featured: false,
     },
     {
       title: "2DCraft",
@@ -99,7 +111,7 @@ const CONFIG = {
         "Programmed fully destructible terrain and sandbox mechanics, utilizing array-based structures for efficient inventory and block management.",
         "Developed interactive gameplay systems, including a dynamic day/night cycle, enemy spawn logic, and a comprehensive crafting UI.",
       ],
-      featured: true,
+      featured: false,
     },
   ],
 

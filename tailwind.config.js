@@ -21,13 +21,14 @@ export default {
           cyan: '#00e5ff',
           'cyan-glow': 'rgba(0, 229, 255, 0.1)',
           text: '#e0e0e0',
-          'text-muted': '#6b7b8d',
-          'text-dim': '#3a4a5a',
+          'text-muted': '#b0bec5',
+          'text-dim': '#546e7a',
         },
       },
       fontFamily: {
         mono: ['"Share Tech Mono"', 'Consolas', 'monospace'],
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        cascadia: ['"CascadiaCode"', 'Consolas', 'monospace'],
       },
       animation: {
         'typing': 'typing 3.5s steps(30, end) forwards, blink-caret 0.75s step-end infinite',

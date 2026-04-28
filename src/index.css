@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== CascadiaCode Font ===== */
+@font-face {
+  font-family: 'CascadiaCode';
+  src: url('../assets/fonts/CascadiaCode-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 /* ===== Matrix Global Styles ===== */
 
 /* Custom scrollbar */
@@ -113,6 +121,30 @@ img {
                0 0 16px rgba(0, 255, 65, 0.2);
 }
 
+/* ===== Profile picture glow effect ===== */
+@keyframes pfp-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.4),
+                0 0 30px rgba(0, 255, 65, 0.2),
+                0 0 60px rgba(0, 255, 65, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.6),
+                0 0 50px rgba(0, 255, 65, 0.3),
+                0 0 80px rgba(0, 255, 65, 0.15),
+                0 0 120px rgba(0, 255, 65, 0.05);
+  }
+}
+
+.pfp-glow {
+  animation: pfp-glow 3s ease-in-out infinite;
+  border: 3px solid transparent;
+  background-image: linear-gradient(#0a0a0a, #0a0a0a), 
+                    linear-gradient(135deg, #00ff41 0%, rgba(0, 229, 255, 0.6) 50%, #00ff41 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
 /* ===== Border glow effect ===== */
 .border-glow {
   position: relative;
@@ -181,5 +213,17 @@ img {
   }
   .tech-tag:hover {
     @apply bg-matrix-green/20 border-matrix-green/40 shadow-matrix;
+  }
+}
+
+/* ===== Responsive Utilities ===== */
+@media (max-width: 640px) {
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-buttons a {
+    width: 100%;
+    justify-content: center;
   }
 }
