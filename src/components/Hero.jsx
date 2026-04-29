@@ -67,9 +67,16 @@ export default function Hero() {
               <TypingEffect texts={CONFIG.roles} />
             </div>
 
-            {/* Short bio */}
-            <p className="text-white/60 text-base leading-relaxed max-w-lg mb-5">
-              {CONFIG.summary.substring(0, 170)}...
+            {/* Short bio with inline "read more" */}
+            <p className="text-white/80 text-base leading-relaxed max-w-lg mb-5">
+              {CONFIG.summary.substring(0, 170)}...{' '}
+              <a
+                href="#about"
+                onClick={(e) => { e.preventDefault(); document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' }); }}
+                className="read-more-link"
+              >
+                read more
+              </a>
             </p>
 
             {/* CTA Buttons — moved up by reducing bottom margin */}
@@ -98,23 +105,25 @@ export default function Hero() {
 
           {/* Right: Photo + Project highlights */}
           <div className="order-1 lg:order-2 animate-fade-in-right flex flex-col items-center w-full mx-auto lg:mx-0" style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}>
-            {/* Profile Picture — no background, glow effect instead of border */}
-            <div className="mb-14 relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden pfp-glow z-10 shrink-0">
-              {CONFIG.avatar ? (
-                <img
-                  src={CONFIG.avatar}
-                  alt={CONFIG.name}
-                  referrerPolicy="no-referrer"
-                  className={`w-full h-full object-cover transition-all duration-700 ${
-                    imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-                  }`}
-                  onLoad={() => setImageLoaded(true)}
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-matrix-green font-mono text-6xl">A</span>
-                </div>
-              )}
+            {/* Profile Picture — circular with pulsing glow */}
+            <div className="mb-14 relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 z-10 shrink-0 pfp-glow">
+              <div className="w-full h-full rounded-full overflow-hidden">
+                {CONFIG.avatar ? (
+                  <img
+                    src={CONFIG.avatar}
+                    alt={CONFIG.name}
+                    referrerPolicy="no-referrer"
+                    className={`w-full h-full object-cover transition-all duration-700 ${
+                      imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                    }`}
+                    onLoad={() => setImageLoaded(true)}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="text-matrix-green font-mono text-6xl">A</span>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Project Highlights (Spans full width, wider than picture) */}
@@ -140,7 +149,7 @@ export default function Hero() {
                     <div className="absolute top-[28px] left-[-35px] w-3 h-3 rounded-full bg-matrix-card border-[2px] border-matrix-green/70 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300" />
                     
                     <p className="text-lg font-bold text-white leading-snug group-hover:text-matrix-green transition-colors">{project.title}</p>
-                    <p className="font-mono text-sm text-white/50 mt-1.5 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
+                    <p className="font-mono text-sm text-white/80 mt-1.5 group-hover:text-matrix-green/80 transition-colors">{project.role}</p>
                   </a>
                 ))}
               </div>

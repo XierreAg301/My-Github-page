@@ -42,7 +42,7 @@ export default function Certificates() {
                 <span className="text-sm font-semibold text-white group-hover:text-matrix-green transition-colors duration-300 line-clamp-2">
                   {cert.title}
                 </span>
-                <svg className="w-4 h-4 text-white/40 flex-shrink-0 transition-all duration-300 group-hover:text-matrix-green group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-white/60 flex-shrink-0 transition-all duration-300 group-hover:text-matrix-green group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </div>

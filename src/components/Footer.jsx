@@ -26,6 +26,20 @@ const FacebookIcon = () => (
   </svg>
 );
 
+// Phone icon
+const PhoneIcon = () => (
+  <svg className="w-4 h-4 text-matrix-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+  </svg>
+);
+
+// Viber icon
+const ViberIcon = () => (
+  <svg className="w-4 h-4 text-matrix-green" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M11.398.002C9.473.028 5.331.344 3.014 2.467 1.294 4.177.523 6.752.392 9.9c-.131 3.148-.298 9.053 5.542 10.703l.004.002-.003 2.444s-.04.988.613 1.19c.764.243 1.214-.49 1.945-1.28.402-.434.957-1.073 1.377-1.564 3.797.322 6.716-.41 7.05-.523.773-.262 5.14-.81 5.853-6.614.737-5.984-.354-9.762-2.308-11.468l-.001-.001c-.6-.56-3.063-2.555-8.566-2.78-.198-.008-.394-.012-.587-.012l.082.003zm.067 1.697c.175 0 .356.004.541.012 4.681.19 6.737 1.757 7.234 2.216 1.618 1.415 2.558 4.765 1.927 9.867-.595 4.828-4.108 5.203-4.758 5.424-.278.095-2.82.72-5.965.507 0 0-2.362 2.854-3.099 3.597-.115.118-.265.17-.36.149-.134-.03-.17-.157-.169-.347l.022-3.903C1.38 17.861 2.12 12.848 2.22 10.08c.1-2.77.72-4.953 2.157-6.374C6.325 1.8 9.78 1.543 11.402 1.7l.064-.001zm.225 2.81a.556.556 0 00-.008 1.112c1.614.039 2.832.506 3.725 1.427.894.921 1.37 2.15 1.454 3.76a.557.557 0 001.112-.053c-.098-1.88-.683-3.368-1.79-4.508-1.106-1.14-2.597-1.703-4.48-1.738h-.013zm-4.26 1.263c-.322-.003-.638.087-.94.338l-.001.001c-.576.487-1.108 1.025-1.529 1.64-.365.533-.503 1.07-.41 1.583.116.63.564 1.368.968 1.938a18.453 18.453 0 003.796 4.343 16.184 16.184 0 005.094 3.271l.012.005.012.004c.596.243 1.434.543 2.192.411.558-.097 1.053-.406 1.543-.874l.002-.002c.474-.498.836-1.087.898-1.69.044-.432-.176-.863-.555-1.115a12.98 12.98 0 00-2.424-1.453c-.658-.3-1.274-.037-1.53.286l-.553.693c-.298.374-.86.315-.86.315l-.003.001c-3.888-1.032-4.986-4.986-4.986-4.986s-.059-.562.314-.86l.694-.553c.323-.256.586-.872.286-1.53a12.97 12.97 0 00-1.453-2.424 1.165 1.165 0 00-.764-.475.898.898 0 00-.154-.014l-.048.166.048-.166zm4.519.879a.556.556 0 00-.024 1.112c.928.02 1.597.303 2.085.806.488.503.755 1.18.76 2.11a.556.556 0 001.112-.011c-.007-1.183-.369-2.127-1.068-2.847-.7-.72-1.665-1.128-2.852-1.17h-.013z"/>
+  </svg>
+);
+
 const iconMap = {
   github: GithubIcon,
   linkedin: LinkedInIcon,
@@ -37,11 +51,10 @@ export default function Footer() {
   return (
     <footer id="contact" className="relative py-16 sm:py-24 border-t border-matrix-border px-4 sm:px-6">
       <div className="max-w-6xl mx-auto px-2 sm:px-6">
-        {/* Big CTA */}
+        {/* Big CTA — "What's Next?" removed */}
         <div className="text-center mb-16">
-          <p className="font-mono text-matrix-green text-sm mb-4">What's Next?</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-matrix-green mb-6">Get In Touch</h2>
-          <p className="text-white/60 max-w-lg mx-auto mb-8 leading-relaxed">
+          <p className="text-white/80 max-w-lg mx-auto mb-8 leading-relaxed">
             I'm currently looking for new opportunities. Whether you have a question, a project idea, or just want to say hi — my inbox is always open.
           </p>
 
@@ -67,9 +80,8 @@ export default function Footer() {
           </span>
           <span className="hidden sm:inline text-matrix-green/50">•</span>
           <span className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-matrix-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
+            <PhoneIcon />
+            <ViberIcon />
             {CONFIG.phoneDisplay}
           </span>
         </div>
@@ -84,7 +96,7 @@ export default function Footer() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative w-12 h-12 flex items-center justify-center rounded-lg border border-matrix-border text-white/50 transition-all duration-300 hover:text-matrix-green hover:border-matrix-green/40 hover:-translate-y-1 hover:shadow-matrix"
+                className="group relative w-12 h-12 flex items-center justify-center rounded-lg border border-matrix-border text-white/70 transition-all duration-300 hover:text-matrix-green hover:border-matrix-green/40 hover:-translate-y-1 hover:shadow-matrix"
                 aria-label={social.platform}
                 title={social.platform}
               >
@@ -96,16 +108,16 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center">
-          <p className="font-mono text-xs text-white/30">
+          <p className="font-mono text-xs text-white/50">
             <span className="text-matrix-green/30">&lt;</span>
             {' '}Built by{' '}
-            <a href={CONFIG.socials.find(s => s.icon === 'github')?.url || '#'} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-matrix-green transition-colors">
+            <a href={CONFIG.socials.find(s => s.icon === 'github')?.url || '#'} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-matrix-green transition-colors">
               {CONFIG.name}
             </a>
             {' '}
             <span className="text-matrix-green/30">/&gt;</span>
           </p>
-          <p className="font-mono text-xs text-white/30 mt-1">
+          <p className="font-mono text-xs text-white/50 mt-1">
             &copy; {new Date().getFullYear()} All rights reserved.
           </p>
         </div>

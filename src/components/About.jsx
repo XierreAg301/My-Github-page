@@ -14,7 +14,7 @@ export default function About() {
         <div className="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
           {/* Left: Summary */}
           <div className="space-y-6">
-            <p className="text-white/60 leading-relaxed">
+            <p className="text-white/80 leading-relaxed">
               {CONFIG.summary}
             </p>
 
@@ -44,7 +44,7 @@ export default function About() {
                   </div>
                   <div>
                     <p className="text-white font-semibold text-sm">{ed.degree}</p>
-                    <p className="text-white/50 text-sm">{ed.school}</p>
+                    <p className="text-white/70 text-sm">{ed.school}</p>
                   </div>
                 </div>
               ))}
@@ -74,10 +74,10 @@ export default function About() {
                 <div className="w-3 h-3 rounded-full bg-red-500/70" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
                 <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                <span className="ml-2 text-white/30">terminal</span>
+                <span className="ml-2 text-white/50">terminal</span>
               </div>
               <div className="space-y-1">
-                <p className="text-white/50">
+                <p className="text-white/70">
                   <span className="text-matrix-green">aaron@matrix</span>
                   <span className="text-white/30">:</span>
                   <span className="text-blue-400">~</span>
@@ -87,7 +87,7 @@ export default function About() {
                 <p className="text-matrix-green/70">
                   ✓ {CONFIG.skills.length} technologies loaded
                 </p>
-                <p className="text-white/50">
+                <p className="text-white/70">
                   <span className="text-matrix-green">aaron@matrix</span>
                   <span className="text-white/30">:</span>
                   <span className="text-blue-400">~</span>

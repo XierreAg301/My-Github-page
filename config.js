@@ -6,7 +6,7 @@ const CONFIG = {
   organization: "University of Caloocan City",
 
   // Profile photo — Google Drive direct-view link
-  avatar: "https://lh3.googleusercontent.com/d/1Z-us_TF9hIgwajoA0XzfMcgvO6Mh1dbi",
+  avatar: "https://lh3.googleusercontent.com/d/1wVLaANjOPyS_FSQpsdic8u79WRU2C6HB",
 
   // University logo — Google Drive direct-view link
   universityLogo: "https://lh3.googleusercontent.com/d/1yjmrJoOXJcNG5A9jOffb1Z8uKx7D44Hb",
@@ -116,7 +116,7 @@ const CONFIG = {
   ],
 
   // ── Contact ─────────────────────────────────────────────────
-  email: "amaroaaronaustin@gmail.com",
+  email: "amaro.aaronaustinbscs2023@gmail.com",
   phone: "+639685081968",
   phoneDisplay: "+63 968 508 1968",
 
