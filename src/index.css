@@ -10,39 +10,25 @@
   font-display: swap;
 }
 
-/* ===== Matrix Global Styles ===== */
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-  background: #1a2a3a;
-  border-radius: 4px;
-}
+/* ===== Custom Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #1a2a3a; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover {
   background: #00ff41;
   box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
 }
 
-/* Selection */
-::selection {
-  background: rgba(0, 255, 65, 0.3);
-  color: #00ff41;
-}
+/* ===== Selection ===== */
+::selection { background: rgba(0, 255, 65, 0.25); color: #00ff41; }
 
-/* Base reset */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ===== Base reset ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
+html { 
+  scroll-behavior: smooth; 
+  /* CSS Scroll Snapping for game-like scene panning */
+  scroll-snap-type: y proximity;
 }
 
 body {
@@ -54,20 +40,24 @@ body {
   position: relative;
 }
 
-/* Scan line overlay effect */
+/* Snap alignment for major sections */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ===== CRT scan-line overlay ===== */
 body::after {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
   z-index: 9999;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 255, 65, 0.008) 0px,
-    rgba(0, 255, 65, 0.008) 1px,
+    rgba(0, 255, 65, 0.006) 0px,
+    rgba(0, 255, 65, 0.006) 1px,
     transparent 1px,
     transparent 4px
   );
@@ -82,165 +72,323 @@ body::after {
   }
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+
+/* ===================================================
+   CONTINUOUS FLOATING PHYSICS (Idle Animation)
+   =================================================== */
+@keyframes float-complex {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(0.5deg); }
+  50% { transform: translateY(-10px) rotate(-0.5deg); }
+  75% { transform: translateY(-4px) rotate(0.2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 
-ul {
-  list-style: none;
+.animate-float {
+  animation: float-complex 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float-complex 7s ease-in-out infinite 1.5s;
+}
+.animate-float-slow {
+  animation: float-complex 9s ease-in-out infinite 0.5s;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+/* ===================================================
+   GAME-LIKE SELECTION STATE (Dim siblings)
+   =================================================== */
+.game-selection-container:hover .game-card-wrapper:not(:hover) {
+  opacity: 0.4;
+  filter: blur(4px) grayscale(50%);
+  transform: scale(0.95);
 }
 
-/* ===== Scroll reveal ===== */
+.game-card-wrapper {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, filter;
+}
+.game-card-wrapper:hover {
+  z-index: 50;
+}
+
+
+/* ===================================================
+   SCROLL REVEAL & PAGE TRANSITIONS
+   =================================================== */
 .reveal-element {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(60px) scale(0.95);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
 }
-
 .reveal-element.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-/* ===== Matrix green glow text ===== */
-.text-glow {
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5),
-               0 0 20px rgba(0, 255, 65, 0.3),
-               0 0 40px rgba(0, 255, 65, 0.15);
+/* ===================================================
+   HERO — 3D DEPTH GRID FLOOR
+   =================================================== */
+.hero-grid-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(rgba(0,255,65,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,65,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%);
+  transform: perspective(600px) rotateX(55deg);
+  transform-origin: bottom center;
 }
 
-.text-glow-sm {
-  text-shadow: 0 0 8px rgba(0, 255, 65, 0.4),
-               0 0 16px rgba(0, 255, 65, 0.2);
+/* ===================================================
+   HERO NAME GLITCH EFFECT
+   =================================================== */
+.hero-name { position: relative; }
+.hero-name.glitch-active { animation: nameGlitch 0.3s steps(2) forwards; }
+.hero-name-accent { display: inline-block; }
+.hero-name.glitch-active .hero-name-accent { animation: accentGlitch 0.3s steps(2) forwards; }
+
+@keyframes nameGlitch {
+  0%   { transform: translate(0); clip-path: none; }
+  20%  { transform: translate(-3px, 2px); clip-path: polygon(0 10%, 100% 10%, 100% 40%, 0 40%); }
+  40%  { transform: translate(3px, -1px); clip-path: polygon(0 50%, 100% 50%, 100% 80%, 0 80%); }
+  60%  { transform: translate(-2px, 2px); }
+  80%  { transform: translate(1px, -1px); clip-path: none; }
+  100% { transform: translate(0); clip-path: none; }
 }
 
-/* ===== Profile picture glow effect (top & sides only) ===== */
-@keyframes pfp-glow {
-  0%, 100% {
-    filter: drop-shadow(0 -4px 8px rgba(0, 255, 65, 0.3))
-            drop-shadow(0 -6px 18px rgba(0, 255, 65, 0.15))
-            drop-shadow(0 -8px 35px rgba(0, 255, 65, 0.08));
-  }
-  50% {
-    filter: drop-shadow(0 -5px 12px rgba(0, 255, 65, 0.7))
-            drop-shadow(0 -8px 28px rgba(0, 255, 65, 0.4))
-            drop-shadow(0 -10px 55px rgba(0, 255, 65, 0.2))
-            drop-shadow(0 -12px 85px rgba(0, 255, 65, 0.1));
-  }
+@keyframes accentGlitch {
+  0%   { color: #00ff41; text-shadow: none; }
+  25%  { color: #00e5ff; text-shadow: -4px 0 rgba(255,0,70,0.7); }
+  50%  { color: #ff0046; text-shadow: 4px 0 rgba(0,229,255,0.7); }
+  75%  { color: #00ff41; text-shadow: 0 0 20px rgba(0,255,65,0.8); }
+  100% { color: #00ff41; text-shadow: none; }
 }
 
-.pfp-glow {
-  animation: pfp-glow 3s ease-in-out infinite;
-  filter: drop-shadow(0 -4px 8px rgba(0, 255, 65, 0.3))
-          drop-shadow(0 -6px 18px rgba(0, 255, 65, 0.15))
-          drop-shadow(0 -8px 35px rgba(0, 255, 65, 0.08));
+/* ===================================================
+   3D HOLOGRAPHIC RINGS (profile)
+   =================================================== */
+.holo-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 255, 65, 0.25);
+  animation: holoSpin 6s linear infinite;
+  pointer-events: none;
+}
+.holo-ring-2 {
+  inset: -16px;
+  border-color: rgba(0, 229, 255, 0.12);
+  animation: holoSpin 10s linear infinite reverse;
+}
+@keyframes holoSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-/* Read more link hover animation */
-.read-more-link {
+/* ===================================================
+   3D CTA BUTTONS
+   =================================================== */
+.btn-primary-3d {
   position: relative;
-  display: inline;
-  color: #00ff41;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  font-family: 'CascadiaCode', monospace;
+  font-size: 0.875rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  padding-bottom: 2px;
-  text-decoration: underline;
-  text-decoration-color: rgba(0, 255, 65, 0.4);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-}
-.read-more-link:hover {
-  color: #ffffff;
-  text-decoration-color: #ffffff;
-}
-
-/* ===== Border glow effect ===== */
-.border-glow {
-  position: relative;
-}
-
-.border-glow::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, rgba(0, 255, 65, 0.4), transparent, rgba(0, 229, 255, 0.3));
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.border-glow:hover::before {
-  opacity: 1;
-}
-
-/* ===== Lightning hover effect ===== */
-@keyframes lightning {
-  0%, 100% { opacity: 0; }
-  5% { opacity: 1; }
-  10% { opacity: 0; }
-  15% { opacity: 0.8; }
-  20% { opacity: 0; }
-}
-
-.lightning-hover {
-  position: relative;
+  color: #0a0a0a;
+  background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+  border-radius: 10px;
   overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 0 #003d10, 0 8px 20px rgba(0,255,65,0.25);
+}
+.btn-primary-3d:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 9px 0 #003d10, 0 14px 30px rgba(0,255,65,0.35);
+}
+.btn-primary-3d:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 3px 0 #003d10, 0 4px 12px rgba(0,255,65,0.2);
+}
+.btn-primary-3d-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-primary-3d:hover .btn-primary-3d-shine { transform: translateX(100%); }
+
+.btn-ghost-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border: 1px solid rgba(0,255,65,0.4);
+  border-radius: 10px;
+  color: #00ff41;
+  background: transparent;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 0 rgba(0,255,65,0.15), 0 6px 20px rgba(0,255,65,0.08);
+}
+.btn-ghost-3d:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: rgba(0,255,65,0.06);
+  box-shadow: 0 8px 0 rgba(0,255,65,0.12), 0 12px 30px rgba(0,255,65,0.15);
+}
+.btn-ghost-3d:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 0 rgba(0,255,65,0.1), 0 4px 12px rgba(0,255,65,0.08);
 }
 
-.lightning-hover::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(0, 255, 65, 0.15) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+/* ===================================================
+   3D TILT CARD
+   =================================================== */
+.tilt-card {
+  transition: box-shadow 0.3s ease;
+  will-change: transform;
+}
+.project-card-3d {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+.project-scanline {
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,255,65,0.015) 3px, rgba(0,255,65,0.015) 4px);
   pointer-events: none;
 }
 
-.lightning-hover:hover::after {
-  animation: lightning 0.6s ease;
+/* ===================================================
+   3D SKILL CHIPS
+   =================================================== */
+.skill-chip-3d {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transform-style: preserve-3d;
+  animation: chipFadeIn 0.5s ease var(--delay, 0ms) both;
+}
+.skill-chip-3d:hover {
+  transform: perspective(300px) translateZ(10px) scale(1.15);
+  box-shadow: 0 8px 20px rgba(0,255,65,0.25), 0 0 12px rgba(0,255,65,0.2);
+  z-index: 10;
+}
+@keyframes chipFadeIn {
+  from { opacity: 0; transform: scale(0.8) perspective(300px) translateZ(-20px); }
+  to   { opacity: 1; transform: scale(1) perspective(300px) translateZ(0); }
 }
 
-/* ===== Section number indicator ===== */
-.section-number {
-  font-family: 'Share Tech Mono', monospace;
-  color: rgba(0, 255, 65, 0.2);
-  font-size: 0.75rem;
-  letter-spacing: 2px;
+/* ===================================================
+   3D TERMINAL (About section)
+   =================================================== */
+.terminal-3d {
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,255,65,0.08), inset 0 1px 0 rgba(0,255,65,0.05);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.terminal-3d:hover {
+  transform: perspective(600px) rotateX(-4deg) rotateY(2deg) translateY(-5px) scale(1.02);
+  box-shadow: 0 25px 70px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,255,65,0.2), inset 0 1px 0 rgba(0,255,65,0.1);
+  z-index: 10;
 }
 
-/* ===== Tech tag ===== */
+/* ===================================================
+   TEXT GLOW & UTILS
+   =================================================== */
+.text-glow { text-shadow: 0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.3); }
+.read-more-link {
+  position: relative; display: inline; color: #00ff41; font-weight: 600; cursor: pointer;
+  transition: color 0.3s ease; text-decoration: underline; text-decoration-color: rgba(0,255,65,0.4);
+  text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.read-more-link:hover { color: #ffffff; text-decoration-color: #ffffff; }
+
 @layer components {
   .tech-tag {
     @apply inline-block px-3 py-1 text-xs font-mono rounded-full
            bg-matrix-green/10 text-matrix-green border border-matrix-green/20
            transition-all duration-300;
   }
-  .tech-tag:hover {
-    @apply bg-matrix-green/20 border-matrix-green/40 shadow-matrix;
-  }
 }
 
-/* ===== Responsive Utilities ===== */
-@media (max-width: 640px) {
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-  .hero-buttons a {
-    width: 100%;
-    justify-content: center;
-  }
+@keyframes blink-caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.animate-blink { animation: blink-caret 0.75s step-end infinite; }
+
+/* ===================================================
+   DATA STREAM TRANSITION & DECRYPTION ANIMATION
+   =================================================== */
+.data-stream-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  pointer-events: none;
+  background-color: transparent;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.data-stream-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(0, 255, 65, 0.03), transparent);
+  background-size: 100% 200%;
+  opacity: 0;
+}
+
+.data-stream-log {
+  font-family: 'Courier New', monospace;
+  color: #00ff41;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+}
+
+.stream-animate {
+  visibility: visible;
+  animation: streamFade 0.6s ease-out forwards;
+}
+
+.stream-animate::before {
+  animation: scanlineSweep 0.6s ease-out forwards;
+}
+
+@keyframes streamFade {
+  0% { opacity: 0; backdrop-filter: none; }
+  20% { opacity: 1; backdrop-filter: saturate(120%) blur(1px); }
+  80% { opacity: 1; backdrop-filter: saturate(120%) blur(1px); }
+  100% { opacity: 0; visibility: hidden; backdrop-filter: none; }
+}
+
+@keyframes scanlineSweep {
+  0% { background-position: 0 -100%; opacity: 1; }
+  100% { background-position: 0 200%; opacity: 0; }
+}
+
+/* Page content decryption animation - FASTER and CLEANER */
+.decrypt-animate {
+  animation: decryptReveal 0.5s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes decryptReveal {
+  0% { opacity: 0.4; transform: translateY(10px); filter: blur(3px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
 }

@@ -49,7 +49,7 @@ const iconMap = {
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative py-16 sm:py-24 border-t border-matrix-border px-4 sm:px-6">
+    <footer id="contact" className="relative min-h-[60vh] flex flex-col items-center justify-center border-t border-matrix-border px-4 sm:px-6 snap-start">
       <div className="max-w-6xl mx-auto px-2 sm:px-6">
         {/* Big CTA — "What's Next?" removed */}
         <div className="text-center mb-16">

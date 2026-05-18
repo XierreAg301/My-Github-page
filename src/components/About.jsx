@@ -3,39 +3,35 @@ import { CONFIG } from '../../config.js';
 
 export default function About() {
   return (
-    <section id="about" className="relative py-16 sm:py-24 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto px-2 sm:px-6">
+    <section id="about" className="relative py-16 sm:py-24 px-4 sm:px-6 min-h-screen flex items-center">
+      <div className="max-w-6xl mx-auto px-2 sm:px-6 w-full">
+
         {/* Section header */}
-        <div className="flex items-center gap-4 mb-12">
+        <div className="reveal-element flex items-center gap-4 mb-14">
+          <span className="font-mono text-matrix-green/40 text-sm tracking-widest">01.</span>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">About Me</h2>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-matrix-green/30 to-transparent" />
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
-          {/* Left: Summary */}
-          <div className="space-y-6">
-            <p className="text-white/80 leading-relaxed">
-              {CONFIG.summary}
-            </p>
+        <div className="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-16">
+
+          {/* Left: Summary + Education */}
+          <div className="reveal-element space-y-6 animate-float">
+            <p className="text-white/80 leading-relaxed text-base">{CONFIG.summary}</p>
 
             {/* Education */}
-            <div className="mt-8">
+            <div className="mt-8 game-selection-container">
               <h3 className="font-mono text-matrix-green text-sm mb-4 tracking-wider">
-                <span className="text-matrix-green/50">&gt;</span> Education
+                <span className="text-matrix-green/40">&gt;</span> Education
               </h3>
               {CONFIG.education.map((ed, i) => (
                 <div
                   key={i}
-                  className="group flex items-center gap-4 p-4 rounded-xl border border-matrix-border bg-matrix-card/50 transition-all duration-300 hover:border-matrix-green/30 hover:bg-matrix-card hover:shadow-matrix"
+                  className={`group game-card-wrapper education-card flex items-center gap-4 p-4 rounded-xl border border-matrix-border bg-matrix-card/50 transition-all duration-300 hover:border-matrix-green/30 hover:bg-matrix-card hover:shadow-matrix ${i % 2 === 0 ? 'animate-float-delayed' : 'animate-float'}`}
                 >
                   <div className="w-12 h-12 rounded-full bg-matrix-green/10 border border-matrix-green/20 flex items-center justify-center flex-shrink-0 overflow-hidden group-hover:border-matrix-green/40 transition-colors">
                     {CONFIG.universityLogo ? (
-                      <img
-                        src={CONFIG.universityLogo}
-                        alt={ed.school}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover"
-                      />
+                      <img src={CONFIG.universityLogo} alt={ed.school} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                     ) : (
                       <svg className="w-5 h-5 text-matrix-green" fill="currentColor" viewBox="0 0 576 512">
                         <path d="M48 195.8l209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1C309 34.1 298.6 32 288 32s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160L0 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-260.2zm48 71.7L96 384c0 53 86 96 192 96s192-43 192-96l0-116.6-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z"/>
@@ -44,49 +40,57 @@ export default function About() {
                   </div>
                   <div>
                     <p className="text-white font-semibold text-sm">{ed.degree}</p>
-                    <p className="text-white/70 text-sm">{ed.school}</p>
+                    <p className="text-white/60 text-sm">{ed.school}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right: Skills grid */}
-          <div>
+          {/* Right: 3D floating skill chips + terminal */}
+          <div className="reveal-element animate-float-slow">
             <h3 className="font-mono text-matrix-green text-sm mb-6 tracking-wider">
-              <span className="text-matrix-green/50">&gt;</span> Tech Stack
+              <span className="text-matrix-green/40">&gt;</span> Tech Stack
             </h3>
-            <div className="flex flex-wrap gap-2">
+
+            {/* Skill chips with depth-pop on hover */}
+            <div className="flex flex-wrap gap-2 mb-8">
               {CONFIG.skills.map((skill, i) => (
                 <span
                   key={i}
-                  className="tech-tag cursor-default"
-                  style={{ animationDelay: `${i * 50}ms` }}
+                  className="skill-chip-3d tech-tag cursor-default"
+                  style={{ '--delay': `${i * 30}ms` }}
                 >
                   {skill}
                 </span>
               ))}
             </div>
 
-            {/* Decorative terminal */}
-            <div className="mt-8 p-4 rounded-xl bg-matrix-darker border border-matrix-border font-mono text-xs">
+            {/* 3D terminal card */}
+            <div className="terminal-3d p-4 rounded-xl bg-matrix-darker border border-matrix-border font-mono text-xs">
               <div className="flex items-center gap-2 mb-3 pb-2 border-b border-matrix-border">
                 <div className="w-3 h-3 rounded-full bg-red-500/70" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
                 <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                <span className="ml-2 text-white/50">terminal</span>
+                <span className="ml-2 text-white/40">neural-terminal — aaron@matrix</span>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1.5">
                 <p className="text-white/70">
                   <span className="text-matrix-green">aaron@matrix</span>
                   <span className="text-white/30">:</span>
                   <span className="text-blue-400">~</span>
                   <span className="text-white/30">$</span>
-                  <span className="text-white ml-2">cat skills.txt</span>
+                  <span className="text-white ml-2">whoami</span>
                 </p>
-                <p className="text-matrix-green/70">
-                  ✓ {CONFIG.skills.length} technologies loaded
+                <p className="text-matrix-green/70 pl-2">Full Stack Developer &amp; Cybersecurity Specialist</p>
+                <p className="text-white/70">
+                  <span className="text-matrix-green">aaron@matrix</span>
+                  <span className="text-white/30">:</span>
+                  <span className="text-blue-400">~</span>
+                  <span className="text-white/30">$</span>
+                  <span className="text-white ml-2">cat skills.txt | wc -l</span>
                 </p>
+                <p className="text-matrix-green/70 pl-2">✓ {CONFIG.skills.length} technologies loaded</p>
                 <p className="text-white/70">
                   <span className="text-matrix-green">aaron@matrix</span>
                   <span className="text-white/30">:</span>
