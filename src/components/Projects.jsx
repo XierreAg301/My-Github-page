@@ -1,23 +1,25 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { CONFIG } from '../../config.js';
+import Timeline3DAccent from './Timeline3DAccent';
 
-/* Reusable 3D tilt card for project cards */
-function TiltCard3D({ children, className = '' }) {
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function TimelineCard({ project, index, isExpanded, onToggle, totalProjects }) {
   const cardRef = useRef(null);
   const animRef = useRef(null);
   const targetRef = useRef({ rx: 0, ry: 0, glow: 0 });
   const currentRef = useRef({ rx: 0, ry: 0, glow: 0 });
 
-  const onMove = useCallback((e) => {
+  const handleMouseMove = useCallback((e) => {
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
     const dx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const dy = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-    targetRef.current = { rx: -dy * 10, ry: dx * 10, glow: 1 };
+    targetRef.current = { rx: -dy * 6, ry: dx * 6, glow: 1 };
   }, []);
 
-  const onLeave = useCallback(() => {
+  const handleMouseLeave = useCallback(() => {
     targetRef.current = { rx: 0, ry: 0, glow: 0 };
   }, []);
 
@@ -25,47 +27,203 @@ function TiltCard3D({ children, className = '' }) {
     const tick = () => {
       const c = currentRef.current;
       const t = targetRef.current;
-      const lerp = (a, b, f) => a + (b - a) * f;
       c.rx = lerp(c.rx, t.rx, 0.1);
       c.ry = lerp(c.ry, t.ry, 0.1);
       c.glow = lerp(c.glow, t.glow, 0.08);
 
       if (cardRef.current) {
         const el = cardRef.current;
-        el.style.transform = `perspective(800px) rotateX(${c.rx}deg) rotateY(${c.ry}deg) translateZ(${c.glow * 10}px)`;
-
-        const glare = el.querySelector('.card-glare');
-        if (glare) {
-          const gx = 50 + c.ry * 3;
-          const gy = 50 - c.rx * 3;
-          glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(0,255,65,0.06) 0%, transparent 60%)`;
-          glare.style.opacity = c.glow;
+        el.style.transform = isExpanded
+          ? 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1.01)'
+          : `perspective(800px) rotateX(${c.rx}deg) rotateY(${c.ry}deg) translateZ(${c.glow * 6}px)`;
+        const g = el.querySelector('.card-glare');
+        if (g) {
+          g.style.background = `radial-gradient(circle at ${50 + c.ry * 4}% ${50 - c.rx * 4}%, rgba(0,255,65,0.06) 0%, transparent 65%)`;
+          g.style.opacity = c.glow;
         }
       }
       animRef.current = requestAnimationFrame(tick);
     };
     animRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(animRef.current);
-  }, []);
+  }, [isExpanded]);
+
+  const handleClick = useCallback(() => {
+    onToggle(index);
+  }, [onToggle, index]);
 
   return (
     <div
       ref={cardRef}
-      className={`project-card-3d ${className}`}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
+      className={`group relative cursor-pointer transition-shadow duration-500 ${
+        isExpanded ? 'shadow-[0_0_40px_rgba(0,255,65,0.12)]' : ''
+      }`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
+      role="button"
+      tabIndex={0}
+      aria-expanded={isExpanded}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } }}
     >
-      {children}
-      <div className="card-glare absolute inset-0 rounded-xl pointer-events-none" style={{ opacity: 0 }} />
+      {/* Outer border glow */}
+      <div
+        className={`absolute inset-0 rounded-2xl border transition-all duration-500 pointer-events-none ${
+          isExpanded
+            ? 'border-matrix-green/40 shadow-[0_0_20px_rgba(0,255,65,0.15)]'
+            : 'border-matrix-border group-hover:border-matrix-green/20'
+        }`}
+      />
+
+      {/* Card body */}
+      <div className={`relative rounded-2xl bg-matrix-card/50 backdrop-blur-sm overflow-hidden transition-all duration-500 ${
+        isExpanded
+          ? 'bg-matrix-card/70 shadow-[inset_0_1px_0_rgba(0,255,65,0.05)]'
+          : 'group-hover:bg-matrix-card/65'
+      }`}>
+        <div className="card-glare absolute inset-0 rounded-2xl pointer-events-none" style={{ opacity: 0 }} />
+
+        {/* Corner accent */}
+        <div className="absolute top-0 right-0 w-10 h-10 pointer-events-none">
+          <div className={`absolute top-0 right-0 w-6 h-[2px] transition-all duration-500 ${
+            isExpanded ? 'bg-matrix-green/50' : 'bg-matrix-green/20 group-hover:bg-matrix-green/40'
+          }`} />
+          <div className={`absolute top-0 right-0 h-6 w-[2px] transition-all duration-500 ${
+            isExpanded ? 'bg-matrix-green/50' : 'bg-matrix-green/20 group-hover:bg-matrix-green/40'
+          }`} />
+        </div>
+
+        {/* Content */}
+        <div className="p-5 sm:p-7">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="font-mono text-[10px] tracking-[0.15em] text-matrix-green/50 bg-matrix-green/5 px-2 py-0.5 rounded">
+                  {project.date}
+                </span>
+                <span className="font-mono text-[10px] tracking-[0.15em] text-matrix-cyan/60">
+                  {project.role}
+                </span>
+              </div>
+              <h3 className={`text-lg sm:text-xl font-bold transition-colors duration-300 ${
+                isExpanded ? 'text-matrix-green' : 'text-white group-hover:text-matrix-green/90'
+              }`}>
+                {project.title}
+              </h3>
+            </div>
+
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex flex-wrap gap-1">
+                {project.technologies.slice(0, 3).map((tech, i) => (
+                  <span
+                    key={i}
+                    className={`px-2 py-0.5 rounded-md font-mono text-[10px] whitespace-nowrap transition-all duration-300 ${
+                      isExpanded
+                        ? 'bg-matrix-green/10 border-matrix-green/30 text-matrix-green'
+                        : 'bg-matrix-green/5 border-matrix-green/15 text-matrix-green/60 group-hover:text-matrix-green/80'
+                    } border`}
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {project.technologies.length > 3 && (
+                  <span className="px-2 py-0.5 rounded-md font-mono text-[10px] text-matrix-green/40 border border-matrix-green/10">
+                    +{project.technologies.length - 3}
+                  </span>
+                )}
+              </div>
+
+              {/* Expand indicator */}
+              <svg
+                className={`w-4 h-4 flex-shrink-0 transition-all duration-400 ${
+                  isExpanded ? 'text-matrix-green rotate-180' : 'text-white/30 group-hover:text-matrix-green/70'
+                }`}
+                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Expandable detail */}
+          <div
+            className={`grid transition-all duration-400 ease-out ${
+              isExpanded ? 'grid-rows-[1fr] opacity-100 mt-5' : 'grid-rows-[0fr] opacity-0 mt-0'
+            }`}
+          >
+            <div className="overflow-hidden">
+              <div className="pt-4 border-t border-matrix-border">
+                {/* Full tech list */}
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {project.technologies.map((tech, i) => (
+                    <span key={i} className="px-2 py-0.5 rounded-md bg-matrix-green/8 border border-matrix-green/20 text-matrix-green/80 font-mono text-[10px]">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Description */}
+                <ul className="space-y-2.5">
+                  {project.description.map((desc, i) => (
+                    <li key={i} className="flex gap-3 text-sm text-white/75 leading-relaxed">
+                      <span className="text-matrix-green mt-0.5 flex-shrink-0 text-xs">▹</span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default function Projects() {
+  const [expandedIndex, setExpandedIndex] = useState(-1);
+  const sectionRef = useRef(null);
+  const scrollRef = useRef(0);
+  const projects = CONFIG.projects;
+
+  const handleToggle = useCallback((index) => {
+    setExpandedIndex((prev) => (prev === index ? -1 : index));
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          const rect = section.getBoundingClientRect();
+          const sectionHeight = rect.height;
+          const viewMid = window.innerHeight / 2;
+          const localScroll = (viewMid - rect.top) / sectionHeight;
+          scrollRef.current = Math.max(0, Math.min(1, localScroll));
+          ticking = false;
+        });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <section id="projects" className="relative py-16 sm:py-24 px-4 sm:px-6 min-h-screen flex items-center">
-      <div className="max-w-6xl mx-auto px-2 sm:px-6 w-full">
+    <section
+      ref={sectionRef}
+      id="projects"
+      className="relative py-16 sm:py-24 px-4 sm:px-6 min-h-screen"
+    >
+      {/* 3D Accent background */}
+      <Timeline3DAccent scrollRef={scrollRef} />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-2 sm:px-6 w-full">
+
         {/* Section header */}
         <div className="reveal-element flex items-center gap-4 mb-14">
           <span className="font-mono text-matrix-green/40 text-sm tracking-widest">02.</span>
@@ -73,68 +231,50 @@ export default function Projects() {
           <div className="flex-1 h-[1px] bg-gradient-to-r from-matrix-green/30 to-transparent" />
         </div>
 
-        {/* Timeline wrapped in game selection container */}
-        <div className="relative game-selection-container">
-          <div className="absolute left-0 md:left-[180px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-matrix-green/40 via-matrix-green/20 to-transparent" />
+        {/* Timeline */}
+        <div className="relative">
+          {/* Timeline rail */}
+          <div className="absolute left-[15px] sm:left-[25px] top-4 bottom-4 w-[2px] rounded-full bg-gradient-to-b from-matrix-green/40 via-matrix-green/20 to-matrix-green/5" />
 
           <div className="space-y-10 sm:space-y-14">
-            {CONFIG.projects.map((project, index) => {
-              // Alternate floating animations for organic feel
-              const floatClass = index % 2 === 0 ? 'animate-float' : 'animate-float-delayed';
-              
+            {projects.map((project, index) => {
+              const isExpanded = expandedIndex === index;
               return (
-                <div key={index} className={`reveal-element group relative grid md:grid-cols-[180px_1fr] gap-4 md:gap-8 game-card-wrapper ${floatClass}`}>
+                <div key={index} className="reveal-element relative pl-10 sm:pl-16">
+                  {/* Timeline node */}
+                  <div
+                    className={`absolute left-[9px] sm:left-[19px] top-6 w-[14px] h-[14px] rounded-full border-2 transition-all duration-500 z-10 ${
+                      isExpanded
+                        ? 'bg-matrix-green border-matrix-green shadow-[0_0_16px_rgba(0,255,65,0.7)] scale-125'
+                        : 'bg-matrix-black border-matrix-green/40 group-hover:border-matrix-green/70 group-hover:shadow-[0_0_8px_rgba(0,255,65,0.3)]'
+                    }`}
+                  />
+                  {/* Node outer ring */}
+                  <div
+                    className={`absolute left-[5px] sm:left-[15px] top-[22px] w-[22px] h-[22px] rounded-full border transition-all duration-700 pointer-events-none ${
+                      isExpanded
+                        ? 'border-matrix-green/30 scale-150 opacity-100'
+                        : 'border-matrix-green/10 opacity-0 scale-100'
+                    }`}
+                    style={{ animation: isExpanded ? 'node-ring-pulse 2s ease-out infinite' : 'none' }}
+                  />
 
-                  {/* Date column */}
-                  <div className="relative font-mono text-sm text-white/60 pt-1 md:text-right md:pr-10">
-                    <span className="relative z-10">{project.date}</span>
-                    <div className="absolute right-0 md:-right-[4px] top-1.5 w-2.5 h-2.5 rounded-full bg-matrix-card border-[1.5px] border-matrix-green/50 group-hover:bg-matrix-green group-hover:shadow-matrix-glow transition-all duration-300 hidden md:block" />
-                    <div className="absolute right-0 md:-right-[9px] top-0.5 w-[20px] h-[20px] rounded-full bg-matrix-green/0 group-hover:bg-matrix-green/20 transition-all duration-500 hidden md:block" />
-                  </div>
+                  {/* Connector to card */}
+                  <div
+                    className={`absolute left-[15px] sm:left-[25px] top-[25px] w-[20px] sm:w-[30px] h-[2px] transition-all duration-500 ${
+                      isExpanded
+                        ? 'bg-gradient-to-r from-matrix-green to-matrix-green/20'
+                        : 'bg-gradient-to-r from-matrix-green/20 to-transparent'
+                    }`}
+                  />
 
-                  {/* 3D card */}
-                  <TiltCard3D className="relative ml-6 md:ml-0 cursor-pointer">
-                    <div className="relative p-5 sm:p-7 rounded-xl border border-matrix-border bg-matrix-card/40 backdrop-blur-sm transition-all duration-500 group-hover:border-matrix-green/40 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-
-                      {/* Holographic corner accent */}
-                      <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none">
-                        <div className="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-matrix-green/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="absolute top-0 right-0 h-full w-[2px] bg-gradient-to-b from-matrix-green/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      </div>
-
-                      {/* Header */}
-                      <div className="mb-4">
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
-                          <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-matrix-green transition-colors duration-300">
-                            {project.title}
-                          </h3>
-                          <div className="flex flex-wrap gap-1.5 sm:flex-shrink-0">
-                            {project.technologies.map((tech, i) => (
-                              <span
-                                key={i}
-                                className="px-2 py-0.5 rounded-md bg-matrix-green/5 border border-matrix-green/15 text-matrix-green/70 font-mono text-[10px] sm:text-[11px] transition-colors whitespace-nowrap shadow-sm"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                        <p className="text-matrix-green/80 font-mono text-sm">{project.role}</p>
-                      </div>
-
-                      <ul className="space-y-2.5">
-                        {project.description.map((desc, i) => (
-                          <li key={i} className="flex gap-3 text-sm text-white/75 leading-relaxed">
-                            <span className="text-matrix-green mt-1 flex-shrink-0 text-xs">▹</span>
-                            {desc}
-                          </li>
-                        ))}
-                      </ul>
-
-                      {/* Scan line reveal on hover */}
-                      <div className="project-scanline absolute inset-0 pointer-events-none rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                  </TiltCard3D>
+                  <TimelineCard
+                    project={project}
+                    index={index}
+                    isExpanded={isExpanded}
+                    onToggle={handleToggle}
+                    totalProjects={projects.length}
+                  />
                 </div>
               );
             })}

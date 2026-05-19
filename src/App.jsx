@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import MatrixRain from './components/MatrixRain';
-import ParticleField, { triggerParticleBurst } from './components/ParticleField';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import Background3D from './components/Background3D';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -8,38 +7,75 @@ import Projects from './components/Projects';
 import Certificates from './components/Certificates';
 import Footer from './components/Footer';
 
+const sections = [
+  { id: 'hero', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'certificates', label: 'Certs' },
+  { id: 'contact', label: 'Contact' },
+];
+
+function SectionDock({ activeSection }) {
+  const handleClick = (e, id) => {
+    e.preventDefault();
+    const el = id === 'hero' ? document.body : document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+  return (
+    <div className="fixed right-5 top-1/2 -translate-y-1/2 z-[200] hidden lg:flex flex-col items-center gap-3">
+      {sections.map((s) => {
+        const isActive = activeSection === s.id;
+        return (
+          <a
+            key={s.id}
+            href={`#${s.id}`}
+            onClick={(e) => handleClick(e, s.id)}
+            className="group relative flex items-center gap-2"
+            aria-label={s.label}
+          >
+            <span className={`font-mono text-[10px] tracking-widest uppercase transition-all duration-300 ${
+              isActive ? 'text-matrix-green opacity-100 translate-x-0' : 'text-white/0 opacity-0 translate-x-4'
+            } group-hover:text-matrix-green/70 group-hover:opacity-100 group-hover:translate-x-0`}>
+              {s.label}
+            </span>
+            <span className={`w-2.5 h-2.5 rounded-full border transition-all duration-500 ${
+              isActive
+                ? 'bg-matrix-green border-matrix-green shadow-[0_0_12px_rgba(0,255,65,0.6)] scale-125'
+                : 'bg-transparent border-matrix-green/30 group-hover:border-matrix-green/60 group-hover:scale-110'
+            }`} />
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('hero');
+  const mouseRef = useRef({ x: 0.5, y: 0.5 });
+  const scrollRef = useRef(0);
   const curtainRef = useRef(null);
 
   useEffect(() => {
     document.title = 'Aaron Austin C. Amaro | Full Stack Developer';
 
-    // Scroll reveal observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       },
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
 
-    document.querySelectorAll('.reveal-element').forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
+    document.querySelectorAll('.reveal-element').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     let currentSection = 'hero';
-    
-    // Section transition observer (for bursting particles like a game warp)
+
     const sectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -47,17 +83,14 @@ export default function App() {
             const sectionId = entry.target.id;
             if (sectionId && sectionId !== currentSection) {
               currentSection = sectionId;
-              triggerParticleBurst();
-              
-              // Trigger Subtle Data Stream Wipe
+              setActiveSection(sectionId || 'hero');
+
               if (curtainRef.current) {
                 curtainRef.current.classList.remove('stream-animate');
-                // Force DOM reflow to restart animation
                 void curtainRef.current.offsetWidth;
                 curtainRef.current.classList.add('stream-animate');
               }
-              
-              // Trigger Decrypt on page content
+
               const contentContainer = document.getElementById('main-content-wrapper');
               if (contentContainer) {
                 contentContainer.classList.remove('decrypt-animate');
@@ -68,16 +101,15 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.3 } // Trigger when a section is substantially in view
+      { threshold: 0.3 }
     );
 
-    document.querySelectorAll('section').forEach((el) => {
-      sectionObserver.observe(el);
-    });
+    document.querySelectorAll('section').forEach((el) => sectionObserver.observe(el));
+    return () => sectionObserver.disconnect();
+  }, []);
 
-    return () => {
-      sectionObserver.disconnect();
-    };
+  const onMouse = useCallback((e) => {
+    mouseRef.current = { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight };
   }, []);
 
   useEffect(() => {
@@ -85,6 +117,7 @@ export default function App() {
     const updateProgress = () => {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const next = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      scrollRef.current = next;
       setScrollProgress(Math.min(1, Math.max(0, next)));
       ticking = false;
     };
@@ -95,15 +128,18 @@ export default function App() {
       }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('mousemove', onMouse, { passive: true });
     updateProgress();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('mousemove', onMouse);
+    };
+  }, [onMouse]);
 
   return (
     <div className="relative min-h-screen bg-matrix-black text-matrix-text overflow-x-hidden">
 
-      <MatrixRain scrollProgress={scrollProgress} />
-      <ParticleField />
+      <Background3D mouseRef={mouseRef} scrollRef={scrollRef} />
 
       {/* Ambient depth glow orbs */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -112,12 +148,13 @@ export default function App() {
         <div className="absolute top-2/3 left-1/3 w-48 h-48 rounded-full bg-matrix-green/3 blur-[80px]" />
       </div>
 
-      {/* Navbar outside of transformed container so position: fixed isn't broken */}
       <Navbar />
 
-      {/* Content wrapper with smooth perspective */}
-      <div className="relative z-10 perspective-[1000px]">
-        <div id="main-content-wrapper" className="w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+      {/* Section indicator dock */}
+      <SectionDock activeSection={activeSection} />
+
+      <div className="relative z-10">
+        <div id="main-content-wrapper" className="w-full h-full">
           <Hero />
           <About />
           <Projects />
@@ -126,7 +163,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* Subtle Data Stream Overlay for Scene Transitions */}
       <div ref={curtainRef} className="data-stream-overlay" aria-hidden="true">
         <div className="data-stream-log text-right">
           <div>[SYS] Fetching data block...</div>

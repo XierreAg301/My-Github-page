@@ -13,8 +13,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@react-three/drei": "9.105",
+    "@react-three/fiber": "8.17",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "three": "^0.160.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

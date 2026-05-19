@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { CONFIG } from '../../config.js';
+import HeroProfile3D from './HeroProfile3D';
 
 /* ── Typing Effect ─────────────────────────────────────────── */
 function TypingEffect({ texts }) {
@@ -111,9 +112,6 @@ export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-20 px-4 sm:px-6">
 
-      {/* Depth grid lines — faux 3D floor */}
-      <div className="hero-grid-floor" aria-hidden="true" />
-
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8 w-full xl:px-12">
         <div className="grid lg:grid-cols-[1fr_520px] gap-8 lg:gap-20 items-center">
 
@@ -185,10 +183,8 @@ export default function Hero() {
             <div className="animate-float">
               <TiltCard className="mb-10 relative" intensity={8}>
               <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 z-10 shrink-0">
-                {/* Holographic ring */}
-                <div className="holo-ring" aria-hidden="true" />
-                <div className="holo-ring holo-ring-2" aria-hidden="true" />
-                <div className="w-full h-full rounded-full overflow-hidden border-2 border-matrix-green/30 shadow-[0_0_40px_rgba(0,255,65,0.2)]">
+                <HeroProfile3D />
+                <div className="w-full h-full rounded-full overflow-hidden border-2 border-matrix-green/30 shadow-[0_0_40px_rgba(0,255,65,0.2)] relative z-[1]">
                   {CONFIG.avatar ? (
                     <img
                       src={CONFIG.avatar}
